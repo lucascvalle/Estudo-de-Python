@@ -1,0 +1,38 @@
+# Estudos realizados baseados nos exercícios do HackerRank
+# Códigos postados aqui como resultado final após o sucesso do código. 
+
+# 01 - Hello World!
+# Criar uma linha que diga "Hello, World!"
+string = "Hello, World!"
+print(string)
+
+# 02 - If/Else
+# Criar uma linha que atenda os seguintes parâmetros:
+# Se n é impar, print Weird
+# Se n é par e fica entre 2 e 5, print Not Weird
+# Se n é par e fica entre 6 e 20, print Weird
+# Se n é par e maior que 20, print Not Weird
+
+n = int(input(""))
+if (n % 2 == 0):
+    if(n >= 2 and n <5):
+        print("Not Weird")
+    elif(n > 5 and n <= 20):
+        print("Weird")
+    elif(n > 20):
+        print("Not Weird")
+elif(n % 2 != 0):
+    print("Weird")
+
+# 03 - Operadores Aritméticos
+# O código utilizará duas entradas de números inteiros e exibirá 3 linhas onde: 
+# O primeiro será a soma dos dois números
+# O Segundo será a diferença dos dois números
+# O terceiro será o produto dos dois números
+
+a = int(input())
+b = int(input())
+c = a * 3
+print(a + b)
+print(a - b)
+print(a * b)
