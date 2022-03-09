@@ -1,0 +1,46 @@
+# Realização de processos de forma automatizada utilizando Python.
+# Instalar Anaconta para a utilização do Jupyter como interface
+# Divisão de ações passo a passo
+
+import pyatutogui
+import pyperclip
+import time
+# pyautogui.PAUSE = O tempo em segundos aguardados pra execução de cada ação
+pyautogui.PAUSE = 0.5
+
+# Passo 1 - Entrar no Sistema.
+# Abrir o Chrome
+pyautogui.press("win")
+pyautogui.write("chrome")
+pyautogui.press("enter")
+
+# Com o chrome em foco, abrir uma nova aba
+pyautogui.hotkey("ctrl", "t")
+
+# Com a nova aba aberta, este código insere um link na barra de endereços e vai direto para ele
+pyperclip.copy("link")
+pyautogui.hotkey("ctrl", "v")
+pyautogui.press("enter")
+
+# Passo 2 - Navegar no Sistema
+# "import time" é utilizado para que o sistema consiga administrar o tempo de forma eficiente
+
+time.sleep(5)
+pyautogui.position()
+# Descobrir a posição exata do mouse depois de 5 segundos
+
+time.sleep(3)
+pyautogui.click(x=,y=, clicks=2)
+# Utilizado para clicar em um local específico da tela. x= posição horizontal, y= posição horizontal, clicks=numero de cliques
+
+# Passo 3 - Importar e Exportar bases de dados e arquivos
+# É possível utilizando os comandos .click, .press, .hotkey de acordo com a localização do arquivo no pc/web
+
+# Passo 4 - Calculando Indicadores
+# Sem o Jupyter, instalar o pandas, numpy e openpyxl
+
+import pandas as pd
+# "as pd" é apelidar o comando
+arquivo = pd.read_excel(r"localdoarquivo/arquivo.xlsx, sheet=Pagina1")
+#o panda lê vários arquivos de extensões diferentes
+# o "r" é usado para caminhos de arquivo DENTRO do computador para força-lo a ler como o sistema lê
