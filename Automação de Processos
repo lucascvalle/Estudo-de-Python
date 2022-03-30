@@ -3,7 +3,7 @@
 # Divisão de ações passo a passo
 # Resultado final: Envio de um e-mail
 
-import pyatutogui
+import pyautogui
 import pyperclip
 import time
 # pyautogui.PAUSE = O tempo em segundos aguardados pra execução de cada ação
