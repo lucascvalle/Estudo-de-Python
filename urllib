@@ -1,0 +1,9 @@
+#Importação e execução da biblioteca URLlib em python
+
+import urllib.request, urllib.parse, urllib.error
+
+#Cria-se o pedido de acesso através do string
+fhand = urllib.request.urlopen('http://data.pr4e.org/romeo.txt')
+#É feita a decodificação de UTF-8 para Unicode
+for line in fhand:
+	print(line.decode().strip()) #É possível identar linhas a partir daqui para poder alterar diretamente o resultado obtido
