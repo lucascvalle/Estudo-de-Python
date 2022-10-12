@@ -1,1 +1,48 @@
+# Aula 01
+# Exercício 01
 
+nome = input ('Digite seu nome: ')
+idade = int (input ('Digite sua idade: '))
+hobby = input ('Digite seu hobby: ')
+
+print(f'Meu nome é {nome}, tenho {idade} anos e meu hobby é {hobby}')
+
+# Exercício 02
+
+ano_nasc = int(input('Digite seu ano de nascimento: '))
+ano_corrente = 2022
+print(f'Você possui {ano_corrente - ano_nasc} anos')
+
+# Exercício 03
+
+nota_1 = float(input('Insira a nota 1: '))
+nota_2 = float(input('Insira a nota 2: '))
+nota_3 = float(input('Insira a nota 3: '))
+nota_4 = float(input('Insira a nota 4: '))
+
+nota_final = (nota_1+nota_2+nota_3+nota_4)/4
+
+if nota_final >= 5:
+    print('O aluno foi aprovado')
+else:
+    print('O aluno não foi aprovado')
+
+# Exercício 04 
+
+peso = float(input('Insira o seu peso: '))
+altura = float(input('Insira a sua altura: '))
+imc = peso/(altura**2)
+
+print(f'O seu IMC é {peso/(altura**2)}')
+print(f'O seu IMC é {imc}')
+
+# Exercício 05
+
+x = int(input('Insira o valor de x: '))
+y = int(input('Insira o valor de y: '))
+resultado = (x + y)*(x + y)
+# Método de resposta 1
+print(f'O valor de (x + y)*(x + y) é: {resultado}')
+
+# Método de resposta 2
+print(f'O valor de (x + y)*(x + y) é: {(x + y)*(x + y)}')
