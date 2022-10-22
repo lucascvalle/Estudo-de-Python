@@ -1,0 +1,122 @@
+# Questão 01:
+
+#definindo a função
+def pode_participar(ano_nasc: int, altura: float):
+    #definindo uma variável "idade" dentro da função baseada no ano de nascimento
+    idade = 2022 - ano_nasc
+    #um cabeçalho pra "ficar legal"
+    print('''
+    Atrações do Parque
+    ------------------    
+    ''')
+    #estabelecendo condições do primeiro brinquedo de forma tolerante
+    if altura < 1.0 or idade < 3:
+        print('Carrossel: Não permitido. ')
+    else:
+        print('Carrossel: Permitido. ')
+    #estabelecendo condições do segundo brinquedo de forma restritiva
+    if 4 <= idade <= 9 and altura <= 1.30:
+        print('Piscina de Bolinhas: Permitido.')
+    else:
+        print('Piscina de Bolinhas: Não permitido.')
+    # estabelecendo condições do segundo brinquedo de forma tolerante
+    if altura <= 1.10:
+        print('Montanha Russa: Não permitido.')
+    else:
+        print('Montanha Russa: Permitido')
+        
+#Questão 2
+
+# definir a lista de números
+lista = []
+# definir o loop de input 
+
+inicio = input('Deseja digitar um número? (S/N)')
+while inicio.upper() == 'S':
+    numero = int(input('Digite um número'))
+    lista.append(numero)
+    inicio = input('Deseja digitar um número? (S/N)')
+    if inicio.upper() == 'N':
+        break
+#print das respostas de a) até d)
+print('a)', lista)
+
+print('b)', sorted(lista))
+
+print('c)', (sum(lista) / len(lista)))
+
+    # loop para achar o número primo na lista
+primos = []
+for valor in lista:
+    a = 0
+    for b in range(1, valor):
+        if valor%b == 0:
+            a += 1
+    if a == 1 :
+        primos.append(valor)
+print('d)', primos)
+
+
+# Questão 03
+
+# definir função de operação dos valores
+def celsius_fahrenheit(graus_c):
+    graus_f = (graus_c * (9/5)) + 32
+    return graus_f
+
+def celsius_kelvin(graus_c):
+    graus_k = graus_c + 273.0
+    return graus_k
+
+def kelvin_celsius(graus_k):
+    graus_c = graus_k - 273.0
+    return graus_c
+
+def kelvin_fahrenheit(graus_k):
+    graus_f = 1.8*(graus_k-273) + 32
+    return graus_f
+
+def fahrenheit_celsius(graus_f):
+    graus_c = (graus_f - 32) * (5/9)
+    return graus_c
+
+def fahrenheit_kelvin(graus_f):
+    graus_k = 273.5 + ((graus_f - 32) * (5/9))
+    return graus_k
+
+# definir input de escala a qual o valor pertence
+  # converter os valores 
+    # mostrar os resultados
+
+tipo = input('Qual o tipo de temperatura que você quer converter? (c = celsius, f = farenheit, k = kelvin)')
+if tipo == 'c':
+    tipo_2 = input('Qual o tipo de resultado você quer? (f = farenheit, k = kelvin')
+    if tipo_2 == 'f':
+        temp = int(input('Qual a temperatura? '))
+        print(f'A temperatura é: {celsius_fahrenheit(temp)}ºF')
+        
+    elif tipo_2 == 'k':
+        temp = int(input('Qual a temperatura? '))
+        print(f'A temperatura é: {celsius_kelvin(temp)} Kelvin')
+elif tipo == 'f':
+    tipo_2 = input('Qual o tipo de resultado você quer? (c = celsius, k = kelvin')
+    if tipo_2 == 'c':
+        temp = int(input('Qual a temperatura? '))
+        print(f'A temperatura é: {fahrenheit_celsius(temp)}ºC')
+    elif tipo_2 == 'k':
+        temp = int(input('Qual a temperatura? '))
+        print(f'A temperatura é: {fahrenheit_kelvin(temp)}')
+elif tipo == 'k':
+    tipo_2 = input('Qual o tipo de resultado você quer? (c = celsius, f = fahrenheit')
+    if tipo_2 == 'c':
+        temp = int(input('Qual a temperatura?'))
+        if temp < 0:
+            print('Não existem temperaturas abaixo de 0 Kelvin')
+        else:
+            print(f'A temperatura é: {kelvin_celsius(temp)}ºC')
+    elif tipo_2 == 'f':
+        temp = int(input('Qual a temperatura?'))
+        if temp < 0:
+            print('Não existem temperaturas abaixo de 0 Kelvin')
+        else:
+            print(f'A temperatura é: {kelvin_fahrenheit(temp)}ºF')
