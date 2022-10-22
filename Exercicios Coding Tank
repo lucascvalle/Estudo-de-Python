@@ -1,4 +1,4 @@
-# Aula 01
+# Aula 01 - Strings e Variáveis
 # Exercício 01
 
 nome = input ('Digite seu nome: ')
@@ -46,3 +46,168 @@ print(f'O valor de (x + y)*(x + y) é: {resultado}')
 
 # Método de resposta 2
 print(f'O valor de (x + y)*(x + y) é: {(x + y)*(x + y)}')
+
+# Aula 02 - If/Else e Iteráveis
+
+# Exercício 01:
+
+idade = int(input('Informe a sua idade: '))
+if idade >= 18:
+    print('Você já é maior de idade!')
+else:
+    print('Você ainda é menor de idade!')
+
+# Exercício 02:
+
+numero = float(input('Informe um número: '))
+if numero > 0:
+    print('O número é positivo')
+elif numero < 0:
+    print('O número é negativo')
+else:
+    print('O número é zero!')
+
+# Exercício 03:
+
+n1 = int(input('Informe o primeiro número: '))
+n2 = int(input('Informe o segundo número:'))
+if n1 > n2:
+    print('O primeiro número é maior')
+elif n2 > n1:
+    print('O segundo número é maior')
+else:
+    print('Os numeros são iguais')
+    
+# Exercício 04:
+
+idade = int(input('Informe sua idade:'))
+if idade < 0 or idade > 150:
+    print('Digite um valor entre 0 e 150')
+    idade = int(input('Informe a sua idade: '))
+else:
+    pass
+salario = float(input('Digite o seu salário: '))
+if salario < 0: 
+    print('Digite um valor maior que 0')
+else:
+    pass
+sexo = input('Digite o seu sexo (M/F): ')
+if sexo.lower() == 'm':
+    print(f'Você tem {idade} anos, ganha {salario:.2f} por mês e é homem.')
+elif sexo.lower() == 'f':
+    print(f'Você tem {idade} anos, ganha {salario:.2f} por mês e é mulher.')
+elif sexo.lower() == 'outro':
+    print(f'Você tem {idade} anos, ganha {salario:.2f} por mês e é de gênero indefinido')
+else:
+    print('Digite apenas M, F ou Outro')
+
+
+# Exercício 05:
+
+n1 = float(input('Informe a nota 1: '))
+n2 = float(input('Informe a nota 2: '))
+n3 = float(input('Informe a nota 3: '))
+media = (n1+n2+n3)/3
+
+if media >= 6.0:
+    print('O aluno foi aprovado')
+elif media < 6.0:
+    print('O aluno foi reprovado')
+    
+# Exercício 06:
+
+resposta = input('''
+Na questão a seguir, qual alternativa é a letra A?
+a) A
+b) B
+c) C
+d) D
+e) E
+''')
+if resposta.lower() == 'a':
+    print('Está correto')
+else:
+    print('Errou!')
+    
+# Exercício 07:
+
+morar = input('Mora perto da vítima? ')
+trabalhar = input('Já trabalhou com a vítima? ')
+telefonar = input('Telefonou para a vítima? ')
+estar = input('Esteve no local do crime? ')
+dever = input('Devia para a vítima? ')
+
+contador = 0
+if morar.lower() == 'sim':
+    contador += 1
+
+if trabalhar.lower() == 'sim':
+    contador += 1
+
+if telefonar.lower() == 'sim':
+    contador += 1
+
+if estar.lower() == 'sim':
+    contador += 1
+
+if dever.lower() == 'sim':
+    contador += 1
+
+if contador == 5:
+    print('É o assassino!!!')
+elif contador == 4 or contador == 3:
+    print('É um cúmplice!')
+elif contador == 2:
+    print('É um suspeito, necessário mais investigações.')
+elif contador < 2:
+    print('É inocente, pode liberar')
+    
+# Exercício 08:
+
+preco_antigo = float(input('Digite o preço antigo do produto: '))
+if preco_antigo <= 50.0:
+    preco_novo = preco_antigo * 1.05
+elif 50 < preco_antigo <= 100:
+    preco_novo = preco_antigo * 1.10
+elif 100 < preco_antigo <= 150:
+    preco_novo = preco_antigo * 1.13
+elif preco_antigo > 150:
+    preco_novo = preco_antigo * 1.15
+
+if preco_novo <= 80.0:
+    print(f'O novo valor de {preco_novo:.2f} é razoável.')
+elif 80.0 < preco_novo <= 115.0:
+    print(f'O novo valor de {preco_novo:.2f} é barato.')
+elif 115 < preco_novo <= 150:
+    print(f'O novo valor de {preco_novo:.2f} é normal.')
+elif 150 < preco_novo <= 170:
+    print(f'O novo valor de {preco_novo:.2f} é caro.')
+elif preco_novo > 170:
+    print(f'O novo valor de {preco_novo:.2f} é muito caro.')
+    
+    
+# Exercício 09:
+
+n1 = int(input('Digite o numero 1: '))
+n2 = int(input('Digite o número 2: '))
+n3 = int(input('Digite o número 3: '))
+
+if n1 > n2:
+    if n1 > n3:
+        print(f'O maior número é {n1}')
+    elif n1 < n3:
+        print(f'O maior número é {n3}')
+elif n2 > n1:
+    if n2 > n3:
+        print(f'O maior número é {n2}')
+    elif n3 > n2:
+        print(f'O maior número é {n3}')
+elif n1 == n2:
+    if n3 > n1:
+        print(f'O maior número é {n3}')
+    elif n3 == n1:
+        print('Os 3 números são iguais')
+    else:
+        print(f'O maior número é {n1}')
+
+
