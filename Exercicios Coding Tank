@@ -209,5 +209,26 @@ elif n1 == n2:
         print('Os 3 números são iguais')
     else:
         print(f'O maior número é {n1}')
+        
+# Aula 03 - While
+
+# Exercício 01: 
+
+numero = int(input('Digite um número: '))
+cont = 1
+while cont <= numero:
+    print(cont, end= ' ')
+    cont += 1
+
+# Exercício 02:
+
+n = int(input('Digite um número: '))
+resultado = 1
+cont = 1
+while cont <= n:
+    resultado *= cont
+    cont += 1
+
+print(resultado)
 
 
