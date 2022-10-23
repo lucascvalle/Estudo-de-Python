@@ -249,6 +249,73 @@ tabuada = 1
 while tabuada <= 10:
     print(f'{tabuada} X {multiplicador} = {tabuada * multiplicador}')
     tabuada += 1
+    
+# Exercício 04:
+
+maior = 0
+num = 1
+while (num != 0):
+    num = int(input('Insira um número: '))
+    if maior == 0:
+        maior = num
+    elif num > maior:
+        maior = num
+print('O maior número encontrado foi:', maior)
+
+# Exercício 05:
+
+idade = int(input('Digite uma idade: '))
+while idade < 0 or idade > 150:
+    idade = int(input('Digite uma idade válida entre 0 e 150: '))
+salario = float(input('Digite um valor de salário: '))
+while salario < 0:
+    salario = float(input('Digite um valor de salário maior ou igual a 0: '))
+genero = str(input('Digite o gênero: (M/F)')).upper()
+while genero != 'F' and genero != 'M' and genero != 'OUTRO':
+    genero = str(input('Digite o gênero válido: (M/F/Outro)')).upper()
+
+print(f'O usuário tem {idade} anos, recebe R$ {salario:.2f} e é do gênero {genero}')
+
+# Exercício 06:
+
+n1 = int(input('Digite o primeiro número: '))
+n2 = int(input('Digite o segundo número: '))
+resultado = 0
+operacao = str(input('''
+Digite qual a operação deseja realizar: 
+(multiplicar/somar/subtrair/dividir)
+Digite "sair" para o resultado.
+''')).lower()
+while operacao != 'somar' and operacao != 'subtrair' and operacao != 'multiplicar' and operacao != 'dividir':
+     operacao = str(input('''
+    Digite qual a operação deseja realizar: 
+    (multiplicar/somar/subtrair/dividir)
+    Digite "sair" para o resultado.
+    ''')).lower()
+
+
+while operacao == 'somar':
+    resultado = n1 + n2
+    break
+
+while operacao == 'subtrair':
+    resultado = n1 - n2
+    break
+
+while operacao == 'multiplicar':
+    resultado = n1 * n2
+    break
+
+while operacao == 'dividir':
+    resultado = n1 / n2
+    break
+
+while operacao != 'sair':
+    operacao = str(input('Digite "SAIR" para obter o resultado')).lower()
+print(resultado)
+
+# Exercício 07:
+
 
 
 
