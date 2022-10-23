@@ -221,7 +221,7 @@ while cont <= numero:
     cont += 1
 
 # Exercício 02:
-
+# Realizando com o contador aumentando 
 n = int(input('Digite um número: '))
 resultado = 1
 cont = 1
@@ -230,5 +230,25 @@ while cont <= n:
     cont += 1
 
 print(resultado)
+
+# Realizando com o contador diminuindo
+num = int(input('Digite o número: '))
+fatorial = 1
+
+while num >= 1:
+    fatorial *= num
+    num -= 1
+
+print(fatorial)
+
+
+# Exercício 03:
+
+multiplicador = int(input('Digite um número para a tabuada: '))
+tabuada = 1
+while tabuada <= 10:
+    print(f'{tabuada} X {multiplicador} = {tabuada * multiplicador}')
+    tabuada += 1
+
 
 
