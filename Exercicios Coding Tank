@@ -406,7 +406,109 @@ lt2 = [2, 4, 6, 8, 10, 12]
 
 res_lt = [ lt1[x] + lt2[x] for x in range (len (lt1))]  
 
-# Exercício 08:
+# Exercício 08: Produto Escalar
+
+lista1 = [5, 7, 2, 8, 9, 12, 5]
+lista2 = [1, 9, 3, 5, 7, 38, 1]
+lista3 = []
+
+for i in range(len(lista1)):
+    lista3.append(lista1[i]*lista2[i])
+sum(lista3)
+
+# Método usando list comprehension
+
+lista1 = [5, 7, 2, 8, 9, 12, 5]
+lista2 = [1, 9, 3, 5, 7, 38, 1]
+
+sum([lista1[i] * lista2[i] for i in range(len(lista1))])
+
+# Exercício 09:
+
+n1 = input('Digite o número 1: ')
+n2 = input('Digite o número 2: ')
+n3 = input('Digite o número 3: ')
+n4 = input('Digite o número 4: ')
+n5 = input('Digite o número 5: ')
+lista_numeros = [n1, n2, n3, n4, n5]
+
+lista_numeros
+
+# Exercício 10: Convertendo lista anterior para float
+
+lista_float = []
+for x in lista_numeros:
+    lista_float.append(float(x)) 
+
+print(lista_float)
+
+print(lista_numeros)
+
+# Exercício 11:
+
+nota1 = float(input('Digite a nota do primeiro bimestre: '))
+nota2 = float(input('Digite a nota do segundo bimestre: '))
+nota3 = float(input('Digite a nota do terceiro bimestre: '))
+nota4 = float(input('Digite a nota do quarto bimestre: '))
+
+lista_notas = [nota1, nota2, nota3, nota4]
+media = sum(lista_notas)/4
+
+print(f'A média final é: {media}')
+
+# Exercício 12:
+
+lista10 = [5, 9, 54, 65, 25, 84, 32, 4, 8, 13]
+
+# a)
+listaa = lista10[:4]
+print('a) ', listaa)
+# b) 
+listab = lista10[-5:]
+print('b) ', listab)
+# c)
+listac = []
+for i in range(len(lista10)):
+    if i %2 == 0:
+        listac.append(lista10[i])
+print('c) ', listac)
+
+# d)
+listad = []
+for i in range(len(lista10)):
+    if i %2 != 0:
+        listad.append(lista10[i])
+print('d) ', listad)
+
+# e)
+listae = lista10.copy()
+listae.sort(reverse=True)
+print('e) ', listae)
+
+# f)
+
+listaf = lista10[:5].copy()
+listaf.reverse()
+print('f) ', listaf)
+
+# g)
+listag = lista10[-5:].copy()
+listag.reverse()
+print('g)', listag)
+
+# Usando apenas indexação de listas:
+
+lista10 = [5, 9, 54, 65, 25, 84, 32, 4, 8, 13]
+
+print(f'a) {lista10[:4]}')
+print(f'b) {lista10[-5:]}')
+print(f'c) {lista10[::2]}')
+print(f'd) {lista10[1::2]}')
+print(f'e) {lista10[::-1]}')
+print(f'f) {lista10[4::-1]}')
+print(f'g) {lista10[:-6:-1]}')
+
+
 
 
 
