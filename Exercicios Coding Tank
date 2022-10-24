@@ -314,7 +314,48 @@ while operacao != 'sair':
     operacao = str(input('Digite "SAIR" para obter o resultado')).lower()
 print(resultado)
 
-# Exercício 07:
+# Aula 04 - Listas, For e List Comprehension
+
+# Exercício 01:
+
+lista = ['macaco', 'girafa', 'elefante', 'boi']
+
+# para cada bicho na lista, imprima o nome do bicho 
+for bicho in lista:
+    print(bicho)
+    
+    # Usando o list comprehension:
+    
+    [print(bicho) for bicho in lista]
+    
+# Exercício 02:
+
+lista = ['macaco', 'girafa', 'elefante', 'boi']
+i = 0
+while (i<len(lista)):
+    print(lista[i])
+    i += 1
+    
+# Exercício 03: 
+
+n = int(input('Digite um número'))
+lista1 = []
+for i in range(0, n):
+    lista1.append(i)
+    i += 1
+
+print(lista1)
+
+# usando list comprehension
+
+n = int(input('Digite um número'))
+
+[i for i in range(0, n)]
+
+# Exercício 04:
+
+lista = [1, 5, 6, 8, 9, 10, 15, 16, 22, 55, 60]
+len([n for n in lista if n %2 == 0])
 
 
 
