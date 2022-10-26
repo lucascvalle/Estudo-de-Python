@@ -508,6 +508,37 @@ print(f'e) {lista10[::-1]}')
 print(f'f) {lista10[4::-1]}')
 print(f'g) {lista10[:-6:-1]}')
 
+# Exercício 13:
+
+import random
+randlist = []
+for i in range(0,10):
+    n = random.randint(0,100)
+    randlist.append(n)
+print(randlist)
+
+maior50 = []
+for value in randlist:
+    if value > 50:
+        maior50.append(value)
+
+print(f'A lista possui {len(maior50)} números maiores que 50')
+
+# Exercício 14:
+
+randlist2 = random.sample(range(0, 100), 10)
+print(randlist2)
+maior50b = []
+for value in randlist2:
+    if value > 50:
+        maior50b.append(value)
+
+print(f'A lista possui {len(maior50b)} números maiores que 50')
+
+# List comprehension
+
+len([x for x in randlist if x > 50])
+
 
 
 
