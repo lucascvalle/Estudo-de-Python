@@ -539,6 +539,164 @@ print(f'A lista possui {len(maior50b)} números maiores que 50')
 
 len([x for x in randlist if x > 50])
 
+# Aula 05 - Funções e Recursão
+
+# Exercício 01:
+
+def dobro(numero):
+    numerox2 = numero*2
+    print(numerox2)
+
+n = int(input('Digite um número: '))
+
+dobro(n)
+
+# Exercício 02: 
+
+def comprimento(raio):
+    return 2*3.14*raio
+
+
+
+r = float(input('Digite o raio da circunferência: '))
+c = comprimento(r)
+
+print(f'Circunferência de comprimento {c:.2f}')
+
+# Exercício 03:
+
+def saudacoes(nome, hora):
+    if hora > 24 or hora < 0:
+        print(f'Digite uma hora válida!')
+    else:
+        if 5 <= hora < 12:
+            print(f'Bom dia, {nome}')
+        elif 12 <= hora < 18:
+            print(f'Boa tarde, {nome}')
+        elif 18 <= hora <= 24 or 0 <= hora < 5:
+            print(f'Boa noite, {nome}')
+
+name = input('Digite seu nome: ')
+hour = int(input('Digite a hora: '))
+
+saudacoes(name, hour)
+
+# Exercício 04:
+
+def itseven(n):
+    if n %2 == 0:
+        print(f'O número é par')
+    else:
+        print(f'O número não é par')
+
+num = int(input('Digite um número'))
+
+itseven(num)
+
+# Exercício 05:
+
+def somalista(lista01, lista02):
+    if len(lista01) != len(lista02):
+       listasoma = []
+       return listasoma
+    elif len(lista01) == len(lista02):
+       listasoma = [lista01[i] + lista02[i] for i in range(len(lista01))]
+       return listasoma
+
+lista_01 = [1, 2, 3, 4, 5]
+lista_02 = [6, 7, 8, 9, 10]
+
+somalista(lista_01, lista_02)
+
+# Exercício 06:
+
+def multiplicalista(lista01, lista02):
+   listamultiplicada = []
+   if len(lista01) != len(lista02):
+      return listamultiplicada
+   elif len(lista01) == len(lista02):
+      listamultiplicada = [lista01[i] * lista02[i] for i in range(len(lista01))]
+      return listamultiplicada
+   
+
+multiplicalista(lista_01, lista_02)
+
+# Exercício 07: 
+
+def media(listadenumeros):
+    return sum(listadenumeros)/len(listadenumeros)
+    
+media(lista_02)
+
+# Exercício 08:
+
+def fatorial(num):
+    fatorial = 1
+    while num >= 1:
+        fatorial *= num
+        num -= 1
+    return fatorial
+
+fatorial(5)
+
+# Com recursão:
+
+def calcula_fatorial(numero):
+    if(numero > 1):
+        return numero * calcula_fatorial(numero - 1) # Passos 
+    else:
+        return 1 # Problema base
+    
+print(calcula_fatorial(5))
+
+# Exercício 09:
+
+# sem função:
+
+fibonacci = [1, 1]
+# indice = int(input('Digite o índice da sequência fibonacci: '))
+indice = 7
+for i in range(2, indice):
+    fibonacci.append(fibonacci[i-1]+fibonacci[i-2])
+print(fibonacci)
+
+# com função (sem recursão)
+
+def fibonacci(index):
+    for i in range(index):
+        if i == 0:
+            number1 = 1
+            print(number1, end= ' ')
+        elif i == 1:
+            number2 = 1
+            print(number2, end= ' ')
+        else:
+            number3 = number1 + number2
+            print(number3, end= ' ')
+            number1 = number2
+            number2 = number3
+
+fibonacci(7)
+
+#  com recursão
+
+def fib(indice):
+    if (indice >= 2):
+        return fib(indice-1)+fib(indice-2)
+    else:
+        return 1
+
+fib(7)
+
+n = int(input('Digite quantos números na sequência: '))
+if n < 0:
+    print('Digite um número válido maior que 0')
+else:
+    print('Sequência Fibonacci: ')
+    for i in range(n):
+        print(fib(i))
+
+
 
 
 
