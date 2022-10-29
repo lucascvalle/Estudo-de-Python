@@ -697,7 +697,88 @@ else:
         print(fib(i))
 
 
+# Exercícios complementares: If/Else
 
+# Questão 01:
+
+l1 = int(input('insira o valor do primeiro lado: '))
+l2 = int(input('insira o valor do segundo lado: '))
+l3 = int(input('insira o valor do terceiro lado: '))
+l4 = int(input('insira o valor do quarto lado: '))
+
+if l1 == l2 and l2 == l3 and l3 == l4:
+    print(f'É quadrado de área {l1*l2}')
+elif l1 == l3 and l2 == l4:
+    print(f'É um retângulo de área {l1*l2}')
+else:
+    print(f'É um polígono de quatro lados não iguais')
+    
+# Questão 02:
+
+produto = float(input('Digite o valor do produto: '))
+porcentagem = float(input('Quanto deseja aumentar ou diminuir? (%) '))
+multiplicador = (porcentagem/100) + 1.0
+resultado = produto * multiplicador
+print(f'O novo preço com a diferença de {porcentagem}% é R${resultado:,.2f}')
+
+# Utilizando o If/Else:
+
+produto = float(input('Digite o valor do produto: '))
+variacao = input('Você quer aumentar ou diminuir?')
+porcentagem = float(input('Digite o valor que você quer aumentar ou diminuir: (apenas números separados por ponto) '))
+
+if variacao.lower() == 'aumentar':
+    resultado = produto * (1 + (porcentagem/100))
+    print(f'O novo preço com a diferença de {porcentagem}% é R${resultado:,.2f}')
+elif variacao.lower() == 'diminuir':
+    resultado = produto * (1 - (porcentagem/100))
+    print(f'O novo preço com a diferença de -{porcentagem}% é R${resultado:,.2f}')
+else:
+    print('Você não definiu corretamente se quer aumentar ou diminuir')
+
+# Questão 03: 
+
+n1 = float(input('Insira a nota 1: '))
+n2 = float(input('Insira a nota 2: '))
+n3 = float(input('Insira a nota 3: '))
+n4 = float(input('Insira a nota 4: '))
+media = (n1+n2+n3+n4)/4
+
+if media >= 6:
+    print('O aluno está aprovado')
+elif media >= 5:
+    print('O aluno está de recuperação')
+    recuperacao = float(input('Qual a nota da prova de recuperação deste aluno? '))
+    if (media + recuperacao)/2 >= 6:
+        print('O aluno está aprovado')
+    elif (media + recuperacao)/2 < 6:
+        print('O aluno está reprovado')
+elif media < 5:
+    print('O aluno está reprovado')
+    
+# Questão 04: 
+
+hora = int(input('Que horas são? '))
+if 5 >= hora <= 11:
+    print('Bom dia, flor do dia!')
+elif 12 <= hora <= 18:
+    print('Boa tarde, sol da tarde!')
+elif (19 <= hora <= 23) or hora <= 4:
+    print('Boa noite, sombra da noite!')
+else:
+    print('Digite um horário entre 0 e 23 horas.')
+    
+# Questão 05: 
+
+numero = int(input('Digite um número divisivel por 5'))
+
+if numero % 5 == 0:
+    if numero % 2 == 0:
+        print('O número é divisível por 5 e par')
+    else:
+        print('O número é divisível por 5 e impar')
+else:
+    print('O número não é divisível por 5')
 
 
 
