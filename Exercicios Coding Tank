@@ -779,6 +779,99 @@ if numero % 5 == 0:
         print('O número é divisível por 5 e impar')
 else:
     print('O número não é divisível por 5')
+    
+# Exercícios Complementares: While
+
+# Questão 01:
+
+qtd_provas = int(input("Informe quantas provas você fez: "))
+cont = 1
+soma_notas = 0
+while cont <= qtd_provas :
+    soma_notas = soma_notas + float(input(f'Informe a nota da prova {cont}: '))
+    cont += 1
+
+media = soma_notas/qtd_provas
+
+if media >= 6.0:
+    print('Aprovado')
+else:
+    print('Reprovado')
+
+# Questão 02:
+
+cont = 0
+soma = 0
+
+parar = True
+
+while parar == True:
+    num = input('Informe um número: ')
+    if num == 'sair':
+        parar = False
+    else:    
+        soma += int(num)
+        cont += 1
+
+media = soma/cont
+print(media)
+
+# Questão 03:
+
+cont = 1
+menor = 0
+soma = 0
+while cont <=3:
+    nota = float(input(f'Informe a nota da prova {cont}'))
+    soma += nota
+
+    if cont == 1:
+        menor = nota
+    
+    if nota < menor:
+        menor = nota
+
+    cont += 1
+
+total_nota = soma - menor
+media = total_nota/2
+print(f'Média sem a menor nota é: {media}')
+
+# Questão 04: 
+
+num_1 = int(input('Informe um número: '))
+num_inicial = num_1
+num_2 = int(input('Informe um número: '))
+
+cont_par = 0
+
+while num_1 <= num_2:
+    if num_1%2 ==0:
+        cont_par += 1
+    num_1 += 1
+
+print(f'Exitem {cont_par} números pares entre {num_inicial} e {num_2}')
+    
+    
+# Questão 05:
+
+num_1 = int(input('Informe um número: '))
+num_inicial = num_1
+num_2 = int(input('Informe um número: '))
+
+cont_impar = 0
+soma = 0 
+
+while num_1 <= num_2:
+    if num_1%2 != 0:
+        cont_impar += 1
+        soma += num_1
+    num_1 += 1
+
+print(f'Exitem {cont_impar} números ímpares entre {num_inicial} e {num_2} e a soma deles é {soma}')
+    
+    
+
 
 
 
