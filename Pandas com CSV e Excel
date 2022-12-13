@@ -1,0 +1,27 @@
+#importar a biblioteca pandas
+import pandas as pd
+
+# ler arquivos csv dentro da mesma pasta do arquivo .py ou passando o path com r'
+# possível inserir chaves de modificação para separadores
+vendas_df = pd.read_csv(r"Contoso - Cadastro Produtos.csv", sep=';')
+# para ler detalhes sobre o arquivo inserido na variável
+vendas_df.info()
+# ou para exibir o dataframe apenas chamar a variável
+vendas_df
+
+#Temos um dataframe chamado vendas_df
+
+#vendas_df['coluna_x'] -> uma lista com os valores da coluna_x (em formato dataframe, é um dataframe com 1 coluna só)
+#vendas_df[0] -> NÃO FUNCIONA ASSIM PARA DATAFRAMES
+#vendas_df[:3] -> pega até a linha de índice 3 do dataframe
+#vendas_df[['coluna_x', 'coluna_y', 'coluna_z']] -> cria um novo dataframe com as colunas coluna_x, coluna_y e coluna_z
+#vendas_df['coluna_x'][0] -> pega o item da 1ª linha da coluna coluna_x
+
+#criando uma lista de clientes
+lista_clientes = vendas_df['ID Cliente']
+lista_clientes
+
+#criando uma lista de produtos com a quantidade vendida
+produtos_quantidade = vendas_df[['ID Produto', 'Quantidade Vendida', 'Quantidade Devolvida']]
+produtos_quantidade
+
