@@ -3,7 +3,7 @@ import pandas as pd
 
 # ler arquivos csv dentro da mesma pasta do arquivo .py ou passando o path com r'
 # possível inserir chaves de modificação para separadores
-vendas_df = pd.read_csv(r"Contoso - Cadastro Produtos.csv", sep=';')
+vendas_df = pd.read_csv(r"Contoso - Vendas - 2017.csv", sep=';')
 # para ler detalhes sobre o arquivo inserido na variável
 vendas_df.info()
 # ou para exibir o dataframe apenas chamar a variável
@@ -25,3 +25,41 @@ lista_clientes
 produtos_quantidade = vendas_df[['ID Produto', 'Quantidade Vendida', 'Quantidade Devolvida']]
 produtos_quantidade
 
+# é possível trabalhar com multiplas bases de dados
+produtos_df = pd.read_csv(r"Contoso - Cadastro Produtos.csv", sep=';')
+lojas_df = pd.read_csv(r"Contoso - Lojas.csv", sep=';')
+clientes_df = pd.read_csv(r"Contoso - Clientes.csv", sep=';')
+
+#usaremos o display para ver todos os dataframes
+display(vendas_df)
+display(produtos_df)
+display(lojas_df)
+display(clientes_df)
+
+#às vezes precisaremos mudar o encoding. Possiveis valores para testar:
+#encoding='latin1', encoding='ISO-8859-1', encoding='utf-8' ou então encoding='cp1252'
+
+# quando trabalhando com um grande número de dados é necessário descartar informações desnecessárias, para isso utiliza-se o método .drop(['nome_coluna'])
+# ao usar o método .drop() por padrão é usado o eixo de linhas, para mudar para colunas usa-se a chave axis=1, que por padrão é =0
+clientes_df = clientes_df.drop(['Unnamed: 7', 'Unnamed: 8', 'Unnamed: 9', 'Unnamed: 10'], axis=1)
+display(clientes_df)
+
+# uma forma mais eficiente ao invés de remover o que não será usado pode ser coletar apenas o que irá ser utilizado. tudo vai depender da quantidade de informações necessárias para o seu projeto
+
+clientes_df = clientes_df[['ID Cliente', 'E-mail']]
+produtos_df = produtos_df[['ID Produto', 'Nome do Produto']]
+lojas_df = lojas_df[['ID Loja', 'Nome da Loja']]
+
+# por fim iremos mesclar as bases de dados que criamos com o método .merge() sendo necessário passar da seguinte forma:
+# novo_dataframe = dataframe1.merge(dataframe2, on='coluna')
+
+vendas_df = vendas_df.merge(produtos_df, on='ID Produto')
+vendas_df = vendas_df.merge(lojas_df, on='ID Loja')
+vendas_df = vendas_df.merge(clientes_df, on='ID Cliente')
+
+display(vendas_df)
+# para unir as colunas é necessário utilizar uma referência comum entre as duas dataframes, sendo assim pode ser necessário renomear alguma coluna
+# para isso podemos utilizar o método .rename()
+# vamos renomear a coluna de e-mails para ter um nome mais intuitivo
+
+vendas_df = vendas_df.rename(columns={'E-mail':'E-mail do Cliente' })
