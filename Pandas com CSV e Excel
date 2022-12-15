@@ -64,6 +64,8 @@ display(vendas_df)
 
 vendas_df = vendas_df.rename(columns={'E-mail':'E-mail do Cliente' })
 
+# a partir daqui podemos dizer que nosso Dataframe vendas_df está pronto e que é possível realizar a análise dos seus dados
+
 # realizando a análise de dados no Data Frame
 # é possivel utilizar o método .value_counts() para ter ideia de quantas vezes um valor se repete no data frame
 
