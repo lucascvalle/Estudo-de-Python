@@ -63,3 +63,39 @@ display(vendas_df)
 # vamos renomear a coluna de e-mails para ter um nome mais intuitivo
 
 vendas_df = vendas_df.rename(columns={'E-mail':'E-mail do Cliente' })
+
+# realizando a análise de dados no Data Frame
+# é possivel utilizar o método .value_counts() para ter ideia de quantas vezes um valor se repete no data frame
+
+frequencia_clientes = vendas_df['E-mail do Cliente'].value_counts()
+# desta forma é possível saber quantas vezes um mesmo cliente realizou uma transação ordenados do maior para o menor
+# agora é possível realizar a plotagem deste dado com o pantas usando o método .plot()
+# dependendo do tamanho da sua base de dados e da informação desejada é possível filtrar os dados a serem exibidos no gráfico, como por exemplo os 5 primeiros clientes
+# além de também ser possível utilizar keywords da biblioteca do pandas para uma melhor exibição
+
+frequencia_clientes[:5].plot(figsize=(15, 5), yticks=range(65, 81, 5))
+
+# Avaliando qual loja mais vendeu:
+# para realizar isso utilizaremos o método .groupby() para agrupar os valores repetidos e somar seus resultados
+vendas_lojas = vendas_df.groupby('Nome da Loja').sum()
+
+# utilizando o método sum para somar os valores iremos acabar somando valores que não trarão um resultado real em relação a outros dados (como IDs de clientes)
+# sendo assim é necessário filtrar os resultados obtidos
+
+vendas_lojas = vendas_lojas[['Quantidade Vendida']]
+
+# agora que temos um dataframe filtrado, vamos ordena-lo
+
+vendas_lojas = vendas_lojas.sort_values('Quantidade Vendida', ascending=False)
+
+# fazendo a plotagem no gráfico com os 5 maiores
+
+vendas_lojas[:5].plot(figsize=(15, 5))
+
+# outra forma de pegar o valor e armazena-lo é utilizando os métodos .max() e .idxmax()
+maior_valor = vendas_lojas['Quantidade Vendida'].max()
+melhor_loja = vendas_lojas['Quantidade Vendida'].idxmax()
+print(melhor_loja, maior_valor)
+
+
+
