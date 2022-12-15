@@ -97,5 +97,28 @@ maior_valor = vendas_lojas['Quantidade Vendida'].max()
 melhor_loja = vendas_lojas['Quantidade Vendida'].idxmax()
 print(melhor_loja, maior_valor)
 
+# calculando o percentual de devoluções:
 
+qtde_vendida = vendas_df['Quantidade Vendida'].sum()
+qtde_devolvida = vendas_df['Quantidade Devolvida'].sum()
+
+print('{:.2%}'.format(qtde_devolvida / qtde_vendida))
+
+
+# caso queiramos fazer este calculo em apenas uma das lojas:
+# primeiros criamos um dataframe específico para a loja
+
+vendas_contosoeuropeonline = vendas_df[vendas_df['ID Loja'] == 306]
+
+# agora basta repetir a operação anterior para esta loja
+
+qtde_vendida = vendas_contosoeuropeonline['Quantidade Vendida'].sum()
+qtde_devolvida = vendas_contosoeuropeonline['Quantidade Devolvida'].sum()
+
+print('{:.2%}'.format(qtde_devolvida / qtde_vendida))
+
+# Criando uma tabela que NÃO inclui os valores de devolução em uma loja específica
+
+loja306semdev = vendas_df[(vendas_df['ID Loja'] == 306) & (vendas_df['Quantidade Devolvida'] == 0)]
+display(loja306semdev)
 
