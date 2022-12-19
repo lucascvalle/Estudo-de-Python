@@ -124,3 +124,57 @@ print('{:.2%}'.format(qtde_devolvida / qtde_vendida))
 loja306semdev = vendas_df[(vendas_df['ID Loja'] == 306) & (vendas_df['Quantidade Devolvida'] == 0)]
 display(loja306semdev)
 
+
+# agora vamos modificar o dataframe para fazer com que ele entenda melhor quais são as informações que estão nele.
+# ao solicitar as informações do dataframe vendas_df.info() é possível ver que as colunas de data estão sendo informadas como objetos e queremos modificar isso
+
+vendas_df['Data da Venda'] = pd.to_datetime(vendas_df['Data da Venda'], format='%d/%m/%Y')
+
+# agora iremos inserir colunas no nosso dataframe com as informações que adquirmos usando o método datetime
+
+vendas_df['Dia da Venda'] = vendas_df['Data da Venda'].dt.day
+vendas_df['Mês da Venda'] = vendas_df['Data da Venda'].dt.month
+vendas_df['Ano da Venda'] = vendas_df['Data da Venda'].dt.year
+display(vendas_df)
+
+# ao verificar como o nosso dataframe está será possível identificar as novas colunas
+# agora podemos fazer a análise de dados em relação a períodos específicos
+
+# modificando valores específicos: 
+# primeiro vamos importar novamente a base de produtos para criar um novo dataframe
+
+novo_produtos_df = pd.read_csv(r'Contoso - Cadastro Produtos.csv', sep=';')
+display(novo_produtos_df.head())
+
+# repare no método .head() que é o mesmo que fazer display(novo_produtos_df[:5]), mostrando os 5 primeiros produtos, o método .tail() faz o mesmo para os 5 ultimos
+
+# antes de começar a modificar, vamos falar de 2 métodos. .loc() e .iloc()
+# 1. loc - permite pegar uma linha de acordo com o índice dela. Também podemos usar como loc[índice_linha, índice_coluna] para acessar um valor específico e modificá-lo.
+# 2. iloc - enxerga o dataframe como linhas e colunas e consegue pegar o valor com um número de linha e um número de coluna. Uso: iloc[num_linha, num_coluna]
+
+# vamos pegar o preço produto Contoso Optical Wheel OEM PS/2 Mouse E60 Black
+#por loc
+print(novo_produtos_df.loc[0])
+#por iloc
+print(novo_produtos_df.iloc[2, 5])
+
+# vamos fazer uma alteração no código para transformar a coluna do nome do produto em seu próprio índice
+
+novo_produtos_df = novo_produtos_df.set_index('Nome do Produto')
+
+# agora podemos passar o nome do produto para procurar um produto usando o método loc
+print(novo_produtos_df.loc['Contoso Optical Wheel OEM PS/2 Mouse E60 Black', 'Preco Unitario'])
+# vale ressaltar que após fazer esta alteração não será mais possível localizar o item pelo índice como antes
+
+# vamos para o seguinte caso:
+# A empresa decidiu aumentar o preço do produto ID 873 (Contoso Wireless Laser Mouse E50 Grey) para 23 reais.
+
+# podemos fazer de duas formas
+# por índice:
+novo_produtos_df.loc['Contoso Wireless Laser Mouse E50 Grey', 'Preco Unitario'] = 23
+# por critério:
+novo_produtos_df.loc[novo_produtos_df['ID Produto'] == 873, 'Preco Unitario'] = 23
+
+
+
+
