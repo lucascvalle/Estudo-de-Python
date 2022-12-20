@@ -176,5 +176,34 @@ novo_produtos_df.loc['Contoso Wireless Laser Mouse E50 Grey', 'Preco Unitario'] 
 novo_produtos_df.loc[novo_produtos_df['ID Produto'] == 873, 'Preco Unitario'] = 23
 
 
+# Agora que o Dataframe foi construído e modificado, vamos exporta-lo para CSV usando o módulo .to_csv()
+# Vamos passar o nome do arquivo, o formato e o separador utilizado
+
+vendas_df.to_csv('Novo_Vendas_2017.csv', sep=';')
+
+# caso queira criar o arquivo em outro local, basta passar o path do arquivo antes do nome do arquivo
+
+# Trabalhando com dicionários no python e convertendo para csv
+# Primeiramente vamos transformar o dicionário em um dataframe
+
+vendas_produtos = {'iphone': [558147, 951642], 'galaxy': [712350, 244295], 'ipad': [573823, 26964], 'tv': [405252, 787604], 'máquina de café': [718654, 867660], 'kindle': [531580, 78830], 'geladeira': [973139, 710331], 'adega': [892292, 646016], 'notebook dell': [422760, 694913], 'notebook hp': [154753, 539704], 'notebook asus': [887061, 324831], 'microsoft surface': [438508, 667179], 'webcam': [237467, 295633], 'caixa de som': [489705, 725316], 'microfone': [328311, 644622], 'câmera canon': [591120, 994303]}
+
+# neste dicionário as chaves são os produtos e os valores (uma lista de 2 valores) são as vendas de 2019 e 2020
+# quando rodamos o seguinte código
+vendas_produtos_df = pd.DataFrame.from_dict(vendas_produtos)
+
+# as chaves se tornam as colunas e os valores são enfileirados em linhas, sendo o primeiro valor o índice 0 e o segundo valor o índice 1
+# parar mudar a orientação dos valores (colunas x linhas) existem argumentos a serem passados no módulo
+
+vendas_produtos_df = pd.DataFrame.from_dict(vendas_produtos, orient='index')
+
+# desta forma o dataframe será criado usando a chave do dicionário como índice
+# dando seguimento para a construção do nosso novo dataframe:
+vendas_produtos_df = vendas_produtos_df.rename(columns={0: 'Vendas 2019', 1: 'Vendas 2020'})
+vendas_produtos_df.to_csv('Vendas Produtos.csv', sep=';', encoding='latin1')
+
+
+
+
 
 
