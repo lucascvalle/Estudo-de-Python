@@ -25,7 +25,7 @@ def pode_participar(ano_nasc: int, altura: float):
     else:
         print('Montanha Russa: Permitido')
         
-#Questão 2
+#Questão 02
 
 # definir a lista de números
 lista = []
