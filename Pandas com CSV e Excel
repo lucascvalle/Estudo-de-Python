@@ -183,6 +183,8 @@ vendas_df.to_csv('Novo_Vendas_2017.csv', sep=';')
 
 # caso queira criar o arquivo em outro local, basta passar o path do arquivo antes do nome do arquivo
 
+
+
 # Trabalhando com dicionários no python e convertendo para csv
 # Primeiramente vamos transformar o dicionário em um dataframe
 
@@ -201,6 +203,48 @@ vendas_produtos_df = pd.DataFrame.from_dict(vendas_produtos, orient='index')
 # dando seguimento para a construção do nosso novo dataframe:
 vendas_produtos_df = vendas_produtos_df.rename(columns={0: 'Vendas 2019', 1: 'Vendas 2020'})
 vendas_produtos_df.to_csv('Vendas Produtos.csv', sep=';', encoding='latin1')
+
+
+
+
+# Integraçao Python-Excel com Pandas e Openpyxl
+# Vamos fazer a alteração de um dado em uma tabela de forma dinâmica entendendo a diferença entre os métodos
+# O trabalho agora é atualizar o multiplicador do imposto de serviços de 30% para 50% (1,3 para 1,5)
+# Pandas - Trabalha o excel como uma base de dados, faz o que quiser com o arquivo, pode desfazer a estrutura original do arquivo
+
+import pandas as pd
+
+tabela = pd.read_excel("Produtos.xlsx")
+# atualizar o multiplicador
+tabela.loc[tabela["Tipo"]=="Serviço", "Multiplicador Imposto"] = 1.5
+
+# fazer a conta do Preço Base Reais
+tabela["Preço Base Reais"] = tabela["Multiplicador Imposto"] * tabela["Preço Base Original"]
+
+# Para salvar o arquivo
+tabela.to_excel("ProdutosPandas.xlsx", index=False)
+
+# Openpyxl - Trata o Excel como uma planilha, edit "como se fosse um VBA", menos eficiente, mantém estrutura original do arquivo
+# Neste caso não iremos importar toda a biblioteca, mas apenas 2 métodos
+
+from openpyxl import Workbook, load_workbook
+
+planilha = load_workbook("Produtos.xlsx")
+
+# No openpyxl é necessário descrever qual aba iremos trabalhar
+aba_ativa = planilha.active
+
+# referenciação de linhas e colunas também se dá de forma diferente, sendo usado o método de letras e números do excel
+# iremos percorrer a coluna de definição com um FOR para realizar a modificação de forma condicional (IF)
+for celula in aba_ativa["C"]:
+    if celula.value == "Serviço":
+        linha = celula.row
+        aba_ativa[f"D{linha}"] = 1.5
+        
+# Vale ressaltar que utilizamos uma f string para definir a linha que iremos alterar
+
+planilha.save("ProdutosOpenPy.xlsx")
+
 
 
 
