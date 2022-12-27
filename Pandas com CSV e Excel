@@ -246,6 +246,38 @@ for celula in aba_ativa["C"]:
 planilha.save("ProdutosOpenPy.xlsx")
 
 
+# Já sabemos como extrair informações para a criação do Data Frame de várias fontes. Agora vamos voltar para o DF que criamos antes, o vendas_df
+# Podemos criar uma barra de progresso para entender como um código atua em nosso dataframe. então vamos primeiro criar um código que percorre o dataframe por completo e altera apenas um dado da última linha.
+
+for i, id_loja in enumerate(vendas_df['ID Loja']):
+    if id_loja == 222:
+        vendas_df.loc[i, 'Quantidade Devolvida'] +=1
+        
+display(vendas_df)
+
+# Agora será possível ver que a "Quantidade Devolvida" da loja de ID 222 será aumentada em 1.
+
+# Sendo assim, vamos importar o objeto 'tqdm' da biblioteca 'tqdm' para criar nossa barra de progresso
+# Vamos escrever o mesmo código mas dessa vez inserindo os recursos importados
+
+from tqdm import tqdm
+
+pbar = tqdm(total=len(vendas_df['ID Loja']), position=0, leave=True)
+# é inserido uma barra de progresso onde passamos o comprimento da nossa barra "total=len(vendas_df['ID Loja'])", a posição inicial "position=0" e como ela deve ser exibida em linha (ao invés de pular a linha) "leave=True"
+
+for i, id_loja in enumerate(vendas_df['ID Loja']):
+    pbar.update()
+    # dentro do nosso FOR e fora do if vamos inserir uma atualização para a nossa barra
+    if id_loja == 222:
+        vendas_df.loc[i, 'Quantidade Devolvida'] +=1
+        
+display(vendas_df)
+
+# a barra criada irá mostrar a porcentagem estabelecida do progresso, o tempo que já passou para a conclusão do programa, o tempo estimado e a quantidade de iterações por segundo realizadas pelo programa.
+# desta forma nos é permitido usar esse recurso para descobrir quando formas diferentes de realizar uma ação podem ser otimizações reais do código.
+
+
+
 
 
 
