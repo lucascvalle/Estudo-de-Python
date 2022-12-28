@@ -3,3 +3,33 @@ Este projeto será realizado com os seguintes arquivos:
 # CadastroClientes.csv: https://drive.google.com/file/d/1SepF0_fpLAZmvS4MSkDVaRIgUkdg2JGx/view
 # CadastroFuncionarios.csv: https://drive.google.com/file/d/1SQIhM-MDwuhuD05BlHdKWtudsxgTMZVc/view
 # BaseServiçosPrestados: https://docs.google.com/spreadsheets/d/1kZVTZAUbrUxOa8JYjv8upAHA4QCwc4Lu/edit#gid=560148505
+
+# Vamos começar a montar a nossa base de dados, entretanto o nosso arquivo precisa de atenção a alguns detalhes.
+# O arquivo CadastroFuncionarios.csv possui um separador de casa decimal para números com uma ","
+
+# Neste projeto vamos fazer o cálculo de algumas informações:
+
+# O valor total da folha salarial?
+# Qual foi o faturamento da empresa?
+# Qual a % de funcionários que já fechou algum contrato?
+# Qual o total de contratos que cada área da empresa já fechou?
+# Qual o total de funcionários por área?
+# Qual o ticket médio mensal dos contratos?
+
+# Vamos começar com a importação de módulos e arquivos
+
+import pandas as pd
+
+funcionarios_df = pd.read_csv('CadastroFuncionarios.csv', sep=';', decimal=',')
+clientes_df = pd.read_csv('CadastroClientes.csv', sep=';', decimal=',')
+servicos_df = pd.read_excel('BaseServiçosPrestados.xlsx')
+
+# Vamos descartar algumas informações desnecessárias:
+
+funcionarios_df = funcionarios_df.drop(['Estado Civil', 'Cargo'], axis=1)
+
+# 1 - Folha Salarial
+
+funcionarios_df['Salario Total'] = funcionarios_df['Salario Base'] + funcionarios_df['Impostos'] + funcionarios_df['Beneficios'] + funcionarios_df['VT'] + funcionarios_df['VR']
+print('Total da folha salarial mensal: R${:,}'.format(funcionarios_df['Salario Total'].sum()))
+
