@@ -33,3 +33,19 @@ funcionarios_df = funcionarios_df.drop(['Estado Civil', 'Cargo'], axis=1)
 funcionarios_df['Salario Total'] = funcionarios_df['Salario Base'] + funcionarios_df['Impostos'] + funcionarios_df['Beneficios'] + funcionarios_df['VT'] + funcionarios_df['VR']
 print('Total da folha salarial mensal: R${:,}'.format(funcionarios_df['Salario Total'].sum()))
 
+# 2 - Faturamento da empresa
+
+# Criando tabela auxiliar de faturamentos
+
+faturamentos_df = servicos_df[['ID Cliente', 'Tempo Total de Contrato (Meses)']].merge(clientes_df[['ID Cliente', 'Valor Contrato Mensal']], on='ID Cliente')
+faturamentos_df['Faturamento Total'] = faturamentos_df['Tempo Total de Contrato (Meses)'] * faturamentos_df['Valor Contrato Mensal']
+print('Total do faturamento Mensal: R${:,}'.format(faturamentos_df['Faturamento Total'].sum()))
+
+# 3 - % Funcionarios que fecharam contrato
+
+qtde_funcionario_contrato_fechado = len(servicos_df['ID Funcionário'].unique())
+qtde_funcionario_total = len(funcionarios_df['ID Funcionário'])
+print('Percentural de funcionários que fecharam contrato: {:.2%}'.format(qtde_funcionario_contrato_fechado/qtde_funcionario_total))
+
+# 4 - Quantidade de contratos por área
+
