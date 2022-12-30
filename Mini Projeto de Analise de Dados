@@ -49,3 +49,19 @@ print('Percentural de funcionários que fecharam contrato: {:.2%}'.format(qtde_f
 
 # 4 - Quantidade de contratos por área
 
+contratos_area_df = servicos_df.merge(funcionarios_df[['ID Funcionário', 'Area']], on='ID Funcionário')
+qtde_contratos_area = contratos_area_df['Area'].value_counts()
+print(qtde_contratos_area)
+
+# 5 - Funcionários por área
+
+funcionarios_area = funcionarios_df['Area'].value_counts()
+print(funcionarios_area)
+funcionarios_area.plot(kind='bar')
+
+# 6 - Ticket Médio Mensal
+
+ticket_medio = clientes_df['Valor Contrato Mensal'].mean()
+print('O valor do ticket médio por cliente é de: R${:,.2f}'.format(ticket_medio))
+
+
