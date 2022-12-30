@@ -1,0 +1,7 @@
+# O python possui de forma nativa métodos que podem manipular arquivos .Método open: -> Abre um arquivo txt
+
+arquivo = open('NomeArquivo.txt', 'r')
+
+# Usamos 'r' para abrir o arquivo para ler (read) e 'w' quando estamos abrindo o arquivo para escrever (write) ou 'a' se formos adicionar (append) uma informação no arquivotxt, não sendo necessário importar bibliotecas para isso.
+
+arquivo_alunos = open('Alunos.txt', 'r')
