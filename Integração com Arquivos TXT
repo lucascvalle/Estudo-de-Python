@@ -1,3 +1,4 @@
+# Lendo Arquivos
 # O python possui de forma nativa métodos que podem manipular arquivos .Método open: -> Abre um arquivo txt
 
 arquivo = open('NomeArquivo.txt', 'r')
@@ -5,3 +6,32 @@ arquivo = open('NomeArquivo.txt', 'r')
 # Usamos 'r' para abrir o arquivo para ler (read) e 'w' quando estamos abrindo o arquivo para escrever (write) ou 'a' se formos adicionar (append) uma informação no arquivotxt, não sendo necessário importar bibliotecas para isso.
 
 arquivo_alunos = open('Alunos.txt', 'r')
+
+# quando fazemos a definição da variável do arquivo existem 2 métodos de leitura do arquivo, o método .readlines e .read(). O método .readlines() transforma cada linha do seu texto em uma lista enquanto o .read() realiza a leitura do texto bruto tal qual apresentado no bloco .txt 
+
+texto_arquivo = arquivo.read()
+
+lista_linhas = arquivo.readlines()
+
+# Criando arquivos
+# Utilizando o método open() com a chave 'w' (write), criamos um novo arquivo que irá substituir qualquer arquivo no mesmo local que estiver o caderno ou endereço definido
+
+novo_arquivo = open('resumo.txt', 'w')
+
+# para escrever utiliza-se o método write()
+
+novo_arquivo.write('Olá, Mundo!')
+
+# Apenas escrever não é o bastante para que o arquivo seja realmente modificado, sendo necessário salvar a versão mais recente do arquivo. Utilizaremos o método .close()
+
+novo_arquivo.close()
+
+# Método With
+# É uma estrutura que é utilizada para abrir o arquivo e ao final da estrutura já realiza o método de fechamento do arquivo.
+
+with open('resumo2.txt', 'w') as arquivo2:
+  arquivo2.write('Olá, mundo!\nSegunda linha')
+  arquivo2.write('Terceira linha')
+    
+# Desta forma não é necessário usar o método .close(), pois a estrutura já faz este passo de forma automática.
+
