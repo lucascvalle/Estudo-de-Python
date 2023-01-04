@@ -1,5 +1,6 @@
 # Lendo Arquivos
 # O python possui de forma nativa métodos que podem manipular arquivos .Método open: -> Abre um arquivo txt
+# Link Arquivo txt: https://drive.google.com/file/d/1k7F2Ke9CrMSI6bZW9KKm-ZKEscTVVxHa/view
 
 arquivo = open('NomeArquivo.txt', 'r')
 
@@ -34,4 +35,11 @@ with open('resumo2.txt', 'w') as arquivo2:
   arquivo2.write('Terceira linha')
     
 # Desta forma não é necessário usar o método .close(), pois a estrutura já faz este passo de forma automática.
+# Agora vamos fazer uma análise do arquivo txt colocado aqui
+# O arquivo provém do curso de Python da Hashtag treinamentos
+
+# repetindo o código:
+
+arquivo_alunos = open('Alunos.txt', 'r')
+lista_linhas = arquivo.readlines()
 
