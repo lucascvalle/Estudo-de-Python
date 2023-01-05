@@ -43,3 +43,25 @@ with open('resumo2.txt', 'w') as arquivo2:
 arquivo_alunos = open('Alunos.txt', 'r')
 lista_linhas = arquivo.readlines()
 
+# removendo o que é desnecessário para a análise
+
+del lista_linhas[:4]
+
+# vamos definir os nossos indicadores dividindo entre contatos que foram feitos através de anuncios e de forma orgânica
+
+qtde_anuncio= 0
+qtde_org = 0
+qtde_yt_org = 0
+qtde_igfb_org = 0
+qtde_site_org = 0
+
+# percorrendo a lista de linhas de forma em que possamos separar os emails da origem do dado
+# aproveitando a estrutura do for, vamos inserir condições para aproveitar a estrutura
+
+for linha in lista_linhas:
+    email, origem = linha.split(",")
+arquivo_alunos.close()
+
+
+
+
