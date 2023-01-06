@@ -41,7 +41,7 @@ with open('resumo2.txt', 'w') as arquivo2:
 # repetindo o código:
 
 arquivo_alunos = open('Alunos.txt', 'r')
-lista_linhas = arquivo.readlines()
+lista_linhas = arquivo_alunos.readlines()
 
 # removendo o que é desnecessário para a análise
 
@@ -60,7 +60,26 @@ qtde_site_org = 0
 
 for linha in lista_linhas:
     email, origem = linha.split(",")
+    if '_org' in origem:
+        qtde_org += 1
+        if 'hashtag_yt_org' in origem:
+            qtde_yt_org += 1
+        if 'hashtag_site_org' in origem:
+            qtde_site_org += 1
+        if 'hashtag_ig_org' in origem or 'hashtag_igfb_org' in origem:
+            qtde_igfb_org += 1
+    else:
+        qtde_anuncio += 1
+        
+# Fechando o arquivo
 arquivo_alunos.close()
+
+# Exibindo resultados:
+print('Quantidade anúncio: {}'.format(qtde_anuncio))
+print('Quantidade orgânico: {}'.format(qtde_org))
+print('Quantidade Youtube: {}'.format(qtde_yt_org))
+print('Quantidade Instagram ou Facebook: {}'.format(qtde_igfb_org))
+print('Quantidade Site: {}'.format(qtde_site_org))
 
 
 
