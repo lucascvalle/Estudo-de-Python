@@ -83,4 +83,11 @@ print('Quantidade Site: {}'.format(qtde_site_org))
 
 
 
+# Agora vamos exportar o resultado para um novo arquivo:
 
+with open('Indicadores.txt', 'w') as arquivo_indicadores:
+    arquivo_indicadores.write('Quantidade anúncio: {}\n'.format(qtde_anuncio))
+    arquivo_indicadores.write('Quantidade orgânico: {}\n'.format(qtde_org))
+    arquivo_indicadores.write('Quantidade Youtube: {}\n'.format(qtde_yt_org))
+    arquivo_indicadores.write('Quantidade Instagram ou Facebook: {}\n'.format(qtde_igfb_org))
+    arquivo_indicadores.write('Quantidade Site: {}\n'.format(qtde_site_org))
