@@ -95,7 +95,8 @@ with open('Indicadores.txt', 'w') as arquivo_indicadores:
  
  
 # Arquivos XML
-# Trabalharemos com XML utilizando a biblioteca xmltodict
+# Trabalharemos com XML utilizando a biblioteca xmltodict para ler notas fiscais eletrônicas (NF-e)
+# Utilizando o Pycharm é possível ter uma formatação do arquivo XML diferenciada, com melhor organização
 # Para instalar iremos ao prompt e faremos:
 
 pip install xmltodict
@@ -106,20 +107,36 @@ pip install xmltodict
 def ler_xml_danfe(nota):
     with open(nota, 'rb') as arquivo:
         documento = xmltodict.parse(arquivo)
-    # print(documento)
+    # utilizando o método "print(documento)" poderemos visualizar todo o documento ordenado em dicionários ordenados baseados na árvore do XML (Xpath)
+    # assim é permitido estabelecer o caminho (PATH) dentro do código para acessar certas informações
+    # Para otimizar o nosso código, vamos identificar o lugar comum onde todas as informações estão:
+    
     dic_notafiscal = documento['nfeProc']['NFe']['infNFe']
+    
+    # vamos coletar algumas informações importantes com essa função
 
     valor_total = dic_notafiscal['total']['ICMSTot']['vNF']
     cnpj_vendeu = dic_notafiscal['emit']['CNPJ']
     nome_vendeu = dic_notafiscal['emit']['xNome']
     cpf_comprou = dic_notafiscal['dest']['CPF']
     nome_comprou = dic_notafiscal['dest']['xNome']
+    
+    # por ultimo vamos coletar os produtos da nota fiscal. Porém, diferente dos outros valores, estes são vários. 
+    # Sendo assim iremos coletar o nome do produto e o valor do produto da seguinte forma:
+    
+    # Primeiro vamos encurtar o nosso Path    
     produtos = dic_notafiscal['det']
+    
+    # Criar uma lista para alocar os produtos
     lista_produtos = []
+    
+    # Utilizar um FOR para coletar os valores e alocar em nossa lista
     for produto in produtos:
         valor_produto = produto['prod']['vProd']
         nome_produto = produto['prod']['xProd']
         lista_produtos.append((nome_produto, valor_produto))
+        
+    # Por último vamos exibir os resultados coletados pra obter o resultado da função:
     resposta = {
         'valor_total': [valor_total],
         'cnpj_vendeu': [cnpj_vendeu],
