@@ -146,3 +146,6 @@ def ler_xml_danfe(nota):
         'lista_produtos': [lista_produtos],
     }
     return resposta
+    
+# Uma vez que estas notas fiscais eletrônicas possuem um padrão a ser seguido, é possível fazer a coleta das mesmas informações independente da nota fiscal utilizada apenas mudando o nome do arquivo.xml. 
+# 
