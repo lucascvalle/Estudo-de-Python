@@ -96,6 +96,7 @@ with open('Indicadores.txt', 'w') as arquivo_indicadores:
  
 # Arquivos XML
 # Trabalharemos com XML utilizando a biblioteca xmltodict para ler notas fiscais eletrônicas (NF-e)
+# Link com os arquivos trabalhados: https://drive.google.com/drive/folders/1zhfuC67YAbAp4IUHLH8eLla-8DSOcaHQ?usp=share_link
 # Utilizando o Pycharm é possível ter uma formatação do arquivo XML diferenciada, com melhor organização
 # Para instalar iremos ao prompt e faremos:
 
@@ -145,7 +146,17 @@ def ler_xml_danfe(nota):
         'nome_comprou': [nome_comprou],
         'lista_produtos': [lista_produtos],
     }
+    
+    # O motivo pelo qual iremos retornar um dicionário como resposta é para que seja possível utilizar um método do Python para transformar um dicionário em uma tabela
+    # O mesmo motivo pelo qual cada item do dicionário é transformado em uma lista, já que ao final da conversão a intenção é de que 1 nota fiscal seja equivalente a 1 linha do banco de dados
     return resposta
     
+# Para termos uma ideia do resultado vamos printar o resultado enquanto chamamos a nossa função:
+
+print(ler_xml_nota('NFs Finais/DANFEBrota.xml'))
+    
 # Uma vez que estas notas fiscais eletrônicas possuem um padrão a ser seguido, é possível fazer a coleta das mesmas informações independente da nota fiscal utilizada apenas mudando o nome do arquivo.xml. 
-# 
+# Agora vamos transpor essas informações obtidas para um banco de dados, para isso iremos utilizar as bibliotecas numpy, pandas e openpyxl
+# Caso não esteja utilizando o Jupyter, será necessário fazer o pip install
+
+import pandas as pd
