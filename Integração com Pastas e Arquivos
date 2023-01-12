@@ -1,0 +1,23 @@
+# Para fazer o a lingugagem "passear" pelo computador utilizaremos as bibliotecas pathlib e shutil
+# Para fazer o download dos arquivos utilizados neste repositório acesse o link: https://drive.google.com/file/d/1XP7-Kf4qbSvKBRPD6AOdYbF9d2G0g6qp/view
+# Após baixar o arquivo, descompacte-o para que torne-se uma pasta
+
+from pathlib import Path
+
+# Esta primeira linha serve para mostrar o caminho (Path) onde o bloco de anotações está sendo escrito
+print(Path.cwd())
+
+# Agora vamos acessar a nossa pasta:
+# Para isso podemos fazer de duas formas, a primeira é passando o endereço completo do diretório que queremos acessar
+# A outra é passar o caminho a partir da pasta onde o programa está sendo executado.
+# IMPORTANTE: Quando escrito no código é necessário substituir a barra inversa (\) pela barra (/), ou seu código não irá funcionar, mesmo que como resultado dos prints ainda apareça a barra.
+
+caminho = Path('Arquivos_Lojas')
+
+# Vamos listar os arquivos que estão na pasta:
+
+arquivos = caminho.iterdir()
+for arquivo in arquivos:
+    print(arquivo)
+
+
