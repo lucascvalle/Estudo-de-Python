@@ -158,19 +158,26 @@ print(ler_xml_nota('NFs Finais/DANFEBrota.xml'))
 # Uma vez que estas notas fiscais eletrônicas possuem um padrão a ser seguido, é possível fazer a coleta das mesmas informações independente da nota fiscal utilizada apenas mudando o nome do arquivo.xml. 
 # Sendo assim, iremos criar um loop FOR capaz de ler todas as notas que sigam o padrão da função dentro de uma pasta de arquivos com a biblioteca OS
 
+# Também vamos transpor essas informações obtidas para um banco de dados, para isso iremos utilizar as bibliotecas pandas
+# Caso não esteja utilizando o Jupyter, será necessário fazer o pip install
+
 import os
+import pandas as pd
 
 lista_arquivos = os.listdir('NFs Finais')
 # Esta linha de código transforma em uma lista todos os arquivos dentro da pasta
 
+
+df_final = pd.DataFrame()
 for arquivo in lista_arquivos:
   if 'xml' in arquivo:
     if 'DANFE' in arquivo:
-      print(ler_xml_DANFE(f'NFs Finais/{arquivo}'))
+      df = pd.DataFrame.from_dict(ler_xml_DANFE(f'NFs Finais/{arquivo}'))
+    df_final = df_final.append(df)
+    
+print(df_final)
+df_final.to_excel('NFs.xlsx', index=False)
 
 
 
-# Agora vamos transpor essas informações obtidas para um banco de dados, para isso iremos utilizar as bibliotecas numpy, pandas e openpyxl
-# Caso não esteja utilizando o Jupyter, será necessário fazer o pip install
 
-import pandas as pd
