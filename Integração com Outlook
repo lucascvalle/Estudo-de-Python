@@ -1,0 +1,16 @@
+# Vamos integrar o Python com o seu e-mail Outlook
+# Para isso utilizaremos a biblioteca win32com.client
+# Comecemos importando a biblioteca e abrindo o outlook
+
+import win32com.client as win32
+outlook = win32.Dispatch('outlook.application')
+
+mail = outlook.CreateItem(0)
+mail.To = 'lucascvalle@outlook.com'
+mail.Subject = 'Email com o CV'
+mail.Body = 'O CV está anexo'
+
+attachment = r'C:\Users\lcvalle\OneDrive\Ambiente de Trabalho\Docs\CV Lucas Costa.pdf'
+mail.Attachments.Add(attachment)
+
+mail.Send()
