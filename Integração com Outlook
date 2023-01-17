@@ -14,3 +14,4 @@ attachment = r'C:\Users\lcvalle\OneDrive\Ambiente de Trabalho\Docs\CV Lucas Cost
 mail.Attachments.Add(attachment)
 
 mail.Send()
+
