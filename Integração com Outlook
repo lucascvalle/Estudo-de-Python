@@ -15,3 +15,6 @@ mail.Attachments.Add(attachment)
 
 mail.Send()
 
+# Agora vamos aprender a "receber" e-mails, extrair anexos e informações de dentro do e-mail recebido.
+# Para isso iremos utilizar a biblioteca imap_tools, sendo necessário fazer o pip install imap_tools no prompt
+
