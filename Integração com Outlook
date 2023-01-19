@@ -65,3 +65,29 @@ for email in lista_emails:
                 informacoes_anexo = anexo.payload
                 with open("RelatorioExcel.xlsx", "wb") as arquivo_excel:
                     arquivo_excel.write(informacoes_anexo)
+                    
+ 
+# O código a seguir é utilizado para enviar e-mail a partir do Gmail SEM utilizar o Outlook.
+import smtplib
+import email.message
+
+def enviar_email():  
+    corpo_email = """
+    <p>Parágrafo1</p>
+    <p>Parágrafo2</p>
+    """
+
+    msg = email.message.Message()
+    msg['Subject'] = "Assunto"
+    msg['From'] = 'remetente'
+    msg['To'] = 'destinatario'
+    password = 'senha' 
+    msg.add_header('Content-Type', 'text/html')
+    msg.set_payload(corpo_email )
+
+    s = smtplib.SMTP('smtp.gmail.com: 587')
+    s.starttls()
+    # Login Credentials for sending the mail
+    s.login(msg['From'], password)
+    s.sendmail(msg['From'], [msg['To']], msg.as_string().encode('utf-8'))
+    print('Email enviado')
