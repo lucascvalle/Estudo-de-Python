@@ -53,3 +53,16 @@ for email in lista_emails:
     print(email.text)
     
 # Agora iremos coletar um anexo de um destes e-mails:
+# Uma vez que já aprendemos a criar o "filtro" para os e-mails que queremos coletar, vamos criar uma sequência de loops FOR que colete os anexos destes e-mails
+
+lista_emails = meu_email.fetch(AND(from_="emaildoremetente@gmail.com"))
+for email in lista_emails:
+    if len(email.attachments) > 0:
+        for anexo in email.attachments:
+            # Podemos escrever o nome completo do arquivo, como também apenas uma parte do nome ou até mesmo apenas a extensão. Dentro da documentação da biblioteca é possível ver várias outras formas de filtrar por tipo, tamanho, etc
+            if "RelatorioExcel.xlsx" in anexo.filename:
+                # Aqui há um detalhe importante: O python não vai conseguir "baixar" diretamente o arquivo para o seu computador então usaremos o método .payload
+                # Este método vai armazenar as informações do anexo em uma variável e depois vamos recriar o arquivo dentro do seu computador
+                informacoes_anexo = anexo.payload
+                with open("RelatorioExcel.xlsx", "wb") as arquivo_excel:
+                    arquivo_excel.write(informacoes_anexo)
