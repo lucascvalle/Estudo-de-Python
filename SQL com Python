@@ -25,4 +25,15 @@ conexao = pyodbc.connect(dados_conexao)
 cursor = conexao.cursor()
 
 # A partir de agora já podemos escrever nossos comandos de SQL
+# dataframe = pd.read_sql('COMANDO_SQL', conexao) -> vai executar o comando SQL, gerando uma consulta e retornando a resposta dessa consulta para o dataframe
+# Para pegar uma tabela inteira do nosso banco de dados, usaremos o comando SQL Select *: "SELECT * FROM BaseDeDados.Tabela"
 
+cursor.execute("SELECT * FROM customers")
+
+# Agora as informações da tabela do banco de dados foram armazenadas em um "Objeto", para visualizar os valores iremos criar outra variável e extrair esses dados
+
+valores = cursor.fetchall()
+
+# Para exibir alguns dos valores obtidos: 
+
+print(valores[:10])
