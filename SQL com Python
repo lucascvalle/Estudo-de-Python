@@ -1,1 +1,28 @@
-# Vamos colocar aqui formas diferentes de usar SQL com Python usando bibliotecas como pyodbc, Pandas e tkinter
+# Vamos colocar aqui formas diferentes de usar SQL com Python usando bibliotecas como pyodbc, Pandas e tkinter. 
+# Iremos trabalhar o conceito CRUD (Create, Read, Update and Delete)
+
+# Primeiro vamos instalar a biblioteca do pyodbc e o driver necessário para SQL através do pip install pyodbc e do site: http://www.ch-werner.de/sqliteodbc/
+# Após isso iremos conferir se o driver está devidamente instalado através do código:
+
+import pyodbc
+print(pyodbc.drivers())
+# Isso irá mostrar todos os drivers de bancos de dados disponíveis em seu computador
+
+# Importante: Será necessário "abrir a conexão" do banco de dados, entretanto é muito importante que façamos o fechamento dessa conexão sempre que ela for aberta
+# Também é importante que você não faça a execução de abertura de conexão uma segunda vez caso o seu código tenha tido sucesso na primeira. 
+
+# Abrindo a conexão: Vamos estabelecer passando 3 dados: Driver, Servidor e o Banco de dados
+
+import pyodbc
+
+dados_conexao = ('Driver={SQLite3 ODBC Driver};Server=localhost;Database=chinook.db')
+conexao = pyodbc.connect(dados_conexao)
+
+# Caso o banco de dados tenha login e senha, será preciso inserir nos dados o UID= e o PWD=
+
+# Agora vamos criar o "cursor"
+
+cursor = conexao.cursor()
+
+# A partir de agora já podemos escrever nossos comandos de SQL
+
