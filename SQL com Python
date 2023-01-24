@@ -24,7 +24,12 @@ conexao = pyodbc.connect(dados_conexao)
 
 cursor = conexao.cursor()
 
-# A partir de agora já podemos escrever nossos comandos de SQL
+# Fechando a conexão: Bastando fechar a conexão e o cursor, sempre lembre de faze-lo quando terminar de editar o código, pois do contrário a conexão pode ser bloqueada e isso pode limitar a edição da base de dados. 
+
+cursor.close()
+conexao.close()
+
+# Considerando que você ainda não fechou sua conexão, a partir de agora já podemos escrever nossos comandos de SQL
 # dataframe = pd.read_sql('COMANDO_SQL', conexao) -> vai executar o comando SQL, gerando uma consulta e retornando a resposta dessa consulta para o dataframe
 # Para pegar uma tabela inteira do nosso banco de dados, usaremos o comando SQL Select *: "SELECT * FROM BaseDeDados.Tabela"
 
@@ -37,3 +42,32 @@ valores = cursor.fetchall()
 # Para exibir alguns dos valores obtidos: 
 
 print(valores[:10])
+
+# Uma vez que já vimos como estabelecer e encerrar a conexão, vamos agora passar pelos 4 pontos do CRUD (Create, Read, Update and Delete)
+
+# Create:
+# Após estabelecer a conexão e criar o cursor, podemos fazer a execução de comandos SQL, entretanto mais um passo é necessário para que a mudança feita seja concluída
+# Outra dica de execução de comandos SQL é utilizar aspas triplas para mandar as informações em um bloco de texto de forma "mais organizada"
+# Neste banco de dados de uma loja de discos vamos inserir o album Death Magnetic da banda Metallica na base de dados. Sabemos que a banda possui o ID de número 50
+
+cursor.execute("""
+INSERT INTO Albums (Title, ArtistID)
+VALUES
+('Death Magnetic', 50)
+"""")
+
+# Para concluir este terceiro passo é necessário utilizar o método .commit() em nosso cursor
+
+cursor.commit()
+
+# E o passo final é o fechamento do cursor e a conexão
+
+cursor.close()
+conexao.close()
+
+# Agora podemos acessar o banco de dados através do DB Browser e ver que a alteração foi feita com sucesso.
+
+
+
+
+
