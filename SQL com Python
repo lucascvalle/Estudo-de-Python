@@ -67,6 +67,26 @@ conexao.close()
 
 # Agora podemos acessar o banco de dados através do DB Browser e ver que a alteração foi feita com sucesso.
 
+# Read: 
+# Agora vamos aprender a utilizar o Pandas para ler e importar informações do SQL.
+# Relembrando que sempre iremos abrir a conexão, entretanto iremos importar duas bibliotecas e uma delas muda a forma como iremos estabelecer essa conexão
+
+import pandas as pd
+import sqlite3
+
+conexao = sqlite3.connect("chinook.db")
+
+# E iremos selecionar uma tabela dentro do banco de dados utilizando o pandas
+
+tabela_clientes = pd.read_sql("SELECT * FROM customers", conexao)
+# Já é possível ver o resultado utilizando o método display()
+# A esta altura já é possível inclusive encerrar a conexão feita com o banco de dados, sendo que as informações atribuidas na variável continuarão lá
+
+conexao.close()
+
+# Agora é possível trabalhar no banco de dados utilizando o Pandas
+
+
 
 
 
