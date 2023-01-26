@@ -86,6 +86,48 @@ conexao.close()
 
 # Agora é possível trabalhar no banco de dados utilizando o Pandas
 
+# Update: 
+
+# O processo para abertura de conexão é o mesmo com a biblioteca pyodbc
+
+import pyodbc
+
+dados_conexao = ('Driver={SQLite3 ODBC Driver};Server=localhost;Database=chinook.db')
+conexao = pyodbc.connect(dados_conexao)
+
+cursor = conexao.cursor()
+
+# Agora iremos fazer a "atualização" da informação no banco de dados através do comando SQL
+# A alteração será o e-mail de um cliente na tabela de clientes do nosso banco de dados, o cliente 1 possui o e-mail luisg@embraer.com.br, iremos mudar para luisgoncalves@embraer.com.br
+# Junto com o código também iremos fazer a conclusão da alteração e o fechamento da conexão/cursor
+
+cursor.execute('''
+UPDATE customers SET Email="luisgoncalves@embraer.com.br" WHERE="luisg@embraer.com.br"
+''')
+
+cursor.commit()
+cursor.close()
+conexao.close()
+
+# Agora podemos atualizar nosso banco de dados e verificar que o E-mail do cliente foi alterado com sucesso
+
+# Delete:
+# Para concluir o CRUD, iremos apagar um dado do nosso banco de dados (Delete)
+# Devemos ter mais cuidado quando tentamos fazer isso pois é relativamente fácil apagar uma tabela inteira quando estamos realizando este processo.
+# Considerando que o processo de abertura e fechamento da conexão é o mesmo, iremos partir do comando cursor.execute()
+# O AlbumID em questão é o número 84, e o ArtistID é 86. Roda De Funk de Funk Como Le Gusta
+
+cursor.execute('''
+DELETE FROM albums WHERE AlbumId=84
+''')
+
+# Vale ressaltar que este processo irá apagar também qualquer relação que este dado em específico possua com qualquer outra informação do seu banco de dados, como compras por parte de clientes. Uma vez que esta informação "não existe mais" no banco de dados.
+
+# Agora que já passamos pelos 4 passos básicos, vamos exercitar de forma mais complexa.
+
+
+
+
 
 
 
