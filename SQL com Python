@@ -152,6 +152,25 @@ tabela_salarios = tabela_salarios.loc[tabela_salarios["Agency"]=="San Francisco"
 tabela_sm = tabela_salarios.groupby("Year").mean()
 display(tabela_sm[["TotalPay", "TotalPayBenefits"]])
 
+# 2. Quantidade de funcionários:
+
+tabela_qtde = tabela_salarios.groupby("Year").count()
+tabela_qtde = tabela_qtde[["Id"]]
+tabela_qtde = tabela_qtde.rename(columns={"Id": "Qtde"})
+display(tabela_qtde)
+
+# 3. Evolução de gastos com salários:
+# Uma vez que estes valores são muito altos, vamos criar uma função que formata o valor para mostrar um resultado final mais adequado
+def formatar(valor):
+    return 'R${:,.2f}'.format(valor)
+
+# Agora vamos fazer o agrupamento e a formatação dos valores aplicando a função
+tabela_total = tabela_salarios.groupby("Year").sum()
+tabela_total = tabela_total[["TotalPay", "TotalPayBenefits"]]
+tabela_total["TotalPay"] = tabela_total["TotalPay"].apply(formatar)
+tabela_total["TotalPayBenefits"] = tabela_total["TotalPayBenefits"].apply(formatar)
+display(tabela_total)
+
 
 
 
