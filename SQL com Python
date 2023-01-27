@@ -124,6 +124,34 @@ DELETE FROM albums WHERE AlbumId=84
 # Vale ressaltar que este processo irá apagar também qualquer relação que este dado em específico possua com qualquer outra informação do seu banco de dados, como compras por parte de clientes. Uma vez que esta informação "não existe mais" no banco de dados.
 
 # Agora que já passamos pelos 4 passos básicos, vamos exercitar de forma mais complexa.
+# Para isso vamos utilizar a seguinte base de dados: https://drive.google.com/file/d/1f6whQ9Obhe0t2IarRfWLk0kjpSv1AG14/view?usp=share_link
+
+# Vamos fazer um relatório de análise apenas da unidade de San Francisco para enteder:
+# Qual a evolução do salário médio ao longo dos anos
+# Quantos funcionários tivemos ao longo dos anos
+# Qual a evolução do total gasto com salários ao longo do ano
+
+# Então vamos começar importando a base de dados:
+
+import pandas as pd
+import sqlite3
+
+conexao = sqlite3.connect('salarios.sqlite')
+
+tabela_salarios = pd.read_sql('SELECT * FROM Salaries', conexao)
+conexao.close()
+
+# Agora que a nossa tabela de salários foi criada com a variável tabela_salarios não precisamos mais manter a conexão aberta, sendo assim podemos partir para a análise:
+# Vamos primeiro garantir que iremos trabalhar apenas com os funcionários da unidade de San Francisco
+
+tabela_salarios = tabela_salarios.loc[tabela_salarios["Agency"]=="San Francisco", :]
+
+# 1. Evolução de salário:
+# Primeiro vamos separar os pagamentos por ano:
+
+tabela_sm = tabela_salarios.groupby("Year").mean()
+display(tabela_sm[["TotalPay", "TotalPayBenefits"]])
+
 
 
 
