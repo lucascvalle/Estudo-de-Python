@@ -209,6 +209,7 @@ def adicionar_insumo():
     caixa_texto.insert("1.0", f"{nome_insumo.get()} adicionado com sucesso")
     
 # Quando se trata de deletar algo, é necessário garantir que iremos deletar algo em específico para não acabar deletando algo que não seja o objetivo    
+
 def deletar_insumo():
     if len(nome_insumo.get()) < 2:
         # deletar tudo da caixa de texto
@@ -230,6 +231,7 @@ def deletar_insumo():
     caixa_texto.insert("1.0", f"{nome_insumo.get()} deletado com sucesso")
 
 # Quando se trata de consumir, diferente do deletar, precisamos apagar um insumo quando informado o nome e o lote sem apagar os demais itens equivalentes daquele insumo de outro lote.
+
 def consumir_insumo():
     if len(nome_insumo.get()) < 2 or len(lote_insumo.get()) < 1:
         caixa_texto.insert("1.0", f"Insira o nome e o lote do insumo corretamente")
@@ -247,8 +249,40 @@ def consumir_insumo():
     # escrever na caixa de texto
     caixa_texto.insert("1.0", f"{nome_insumo.get()} consumido em {qtde_insumo.get()} unidades")
     
+# Diferente das ações anteriores, iremos apenas coletar uma informação que não será editada e para extrair essa informação precisaremos tomar alguns cuidados
+# Vamos começar fazendo uma consulta no banco de dados, mas primeiro fazendo algumas exigências para o usuário:
+
 def visualizar_insumo():
-    print("visualizar_insumo")
+    if len(nome_insumo.get()) < 2:
+        # deletar tudo da caixa de texto
+        caixa_texto.delete("1.0", END)
+    
+        # escrever na caixa de texto
+        caixa_texto.insert("1.0", f"Nome do insumo inválido")
+        return
+    # Pesquisar o insumo
+    cursor.execute(f'''
+    SELECT * FROM Estoque
+    WHERE Produto="{nome_insumo.get()}"
+    ''')
+    
+    valores = cursor.fetchall()
+    
+    texto = ""
+    for id_produto, nome, quantidade, validade, lote in valores:
+        texto = texto + f'''
+        ---------
+        Produto: {nome}
+        Quantidade: {quantidade}
+        Validade: {validade}
+        Lote: {lote}
+        ---------
+        '''
+
+    # deletar tudo da caixa de texto
+    caixa_texto.delete("1.0", END)    
+    # escrever na caixa de texto
+    caixa_texto.insert("1.0", texto)
 
     
     
