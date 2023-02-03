@@ -472,6 +472,41 @@ conexao = mysql.connector.connect(
 )
 cursor = conexao.cursor()
 
+# Create
+# Vamos inserir um produto "Refrigerante" dentro da nossa tabela de vendas com o valor de 2 reais (inteiro)
+
+nome_produto = "Refrigerante"
+valor = 2
+
+comando = f'INSERT INTO vendas (nome_produto, valor) VALUES ("{nome_produto}", {valor})'
+
+cursor.execute(comando)
+conexao.commit()
+
+# Read
+# Extrair informações da tabela para o Python
+comando = f'SELECT * FROM vendas'
+cursor.execute(comando)
+resultado = cursor.fetchall()
+print(resultado)
+
+# Update
+# Atualizando o valor de um item na tabela
+nome_produto = "Refrigerante"
+valor = 3
+comando = f'UPDATE vendas SET valor = {valor} WHERE nome_produto = "{nome_produto}"'
+cursor.execute(comando)
+conexao.commit()
+
+# Delete
+nome_produto = "Refrigerante"
+valor = 3
+comando = f'DELETE FROM vendas WHERE nome_produto = "{nome_produto}"' # Após o WHERE é possível definir diferentes formas de seleção como IdVendas ou por valor
+cursor.execute(comando)
+conexao.commit()
+
+# Encerrando a conexão:
+
 cursor.close()
 conexao.close()
 
