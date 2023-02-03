@@ -171,6 +171,9 @@ tabela_total["TotalPay"] = tabela_total["TotalPay"].apply(formatar)
 tabela_total["TotalPayBenefits"] = tabela_total["TotalPayBenefits"].apply(formatar)
 display(tabela_total)
 
+
+--------------------------------------------------------------------------------------------------------------------
+
 # Agora iremos criar uma janela de controle de estoque:
 # Iremos utilizar a biblioteca tkinter, sendo assim os arquivos necessários estão nos links a seguir:
 # Janela: https://drive.google.com/drive/folders/1vn4FnGK6kB8Heq6CNNTey1O5zKC0sA86?usp=share_link
@@ -439,6 +442,39 @@ window.mainloop()
 
 cursor.close()
 conexão.close()
+
+
+
+--------------------------------------------------------------------------------------------------------
+
+# Integração MySQL
+
+# Instalação do Módulo: https://bobbyhadz.com/blog/python-no-module-named-mysql
+# No link será possível acessar diversas formas de instalar o módulo do MySQL connector para diferentes editores de código Python
+
+# No MySQL:
+# Comece criando um novo banco de dados (Schema) no MySQL
+# Crie uma tabela dentro da database (Schema) chamada Vendas
+# Coluna IdVendas (INT) com PK(Primary Key), NN(Not Null) e AI(Auto Increment)
+# Colunas nome_produto (VARCHAR(45)) e valor (INT)
+
+# No editor Python:
+# Cuidados: Não dê o nome "mysql.py" para o arquivo que está editando, isto pode gerar conflitos na importação do pacote.
+
+import mysql.connector
+
+
+conexao = mysql.connector.connect(
+    host='localhost',
+    user='root', # nome de usuário escolhido durante instalação do MySQL
+    password='1234', # senha escolhida durante a instalação do MySQL
+    database='database', # nome usado para a criação da database (Schema) no MySQL
+)
+cursor = conexao.cursor()
+
+cursor.close()
+conexao.close()
+
 
 
 
