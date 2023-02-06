@@ -1,0 +1,17 @@
+# Vamos começar a fazer o Web-Scrapping e para isso precisaremos instalar algumas ferramentas.
+# Vale ressaltar que o navegador utilizado para isso será o Chrome, uma vez que é o navegador com a melhor compatibilidade para essa tarefa.
+# Primeiro vamos instalar o Selenium com o "pip install selenium" ou "pip install selenium --upgrade" (para atualizar na versão mais recente) e o "pip install webdriver-manager"
+# Agora faça o download do ChromeDriver no link: https://chromed"iver.chromium.org/downloads baseado na versão do seu navegador, utilize a versão mais aproximada.
+# Remova o arquivo da pasta .zip e insira-o na mesma pasta onde está instalado o Python. 
+# Caso tenha feito a instalação corretamente, ao rodar o código a seguir uma segunda instalação será feita e a janela do navegador irá aparecer com a mensagem de que esta é controlada de forma automatizada:
+
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
+servico = Service(ChromeDriverManager().install())
+navegador = webdriver.Chrome(service=servico)
+
+# Agora que definimos o navegador podemos acessar um site utilizando o método .get()
+
+navegador.get("https://www.microsoft.com/")
