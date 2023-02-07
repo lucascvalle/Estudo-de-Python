@@ -15,3 +15,36 @@ navegador = webdriver.Chrome(service=servico)
 # Agora que definimos o navegador podemos acessar um site utilizando o método .get()
 
 navegador.get("https://www.microsoft.com/")
+
+# Selecionando Objetos:
+# Faça o download da página html que pode também ser acessada pelo Selenium através do Path, utilizarei a página local para evitar alterações no código:
+# Link: https://drive.google.com/file/d/1ccAKYu9eWlrrenWJsaNcdyDttBSP1yBN/view?usp=share_link
+# Pegando o arquivo na mesma pasta que o arquivo python.
+
+import os
+
+caminho = os.getcwd()
+arquivo = caminho + r"\Pagina Hashtag.html"
+navegador.get(arquivo)
+
+# Seleção por ID: 
+# Para descobrir o ID de um elemento da página iremos utilizar a tecla f12 no navegador Google Chrome ou com o botão direito do mouse na página e clicando em Inspecionar
+# Uma nova janela vai abrir no seu navegador que no canto superior esquerdo da nova janera terá um botão de um ponteiro dentro de uma caixa, também pode ser acessado pelo atalho do teclado Shift + Ctrl + C
+# O botão permitirá que você veja a referência do objeto na página ao posicionar o mouse sobre o elemento.
+# No final da página existem duas caixas de texto para preenchimento de nome e e-mail, vamos verificar o ID de cada um destes elementos.
+# Identificamos: <input type="text" id="fullname" name="fullname" placeholder="Seu primeiro nome" required="" data-name="fullname"> e <input type="text" id="email" name="email" placeholder="Seu melhor e-mail" required="" data-name="email">
+# Vemos que o elemento possui Tipo, ID, nome, etc.
+# Iremos coletar o ID de cada um destes elementos.
+# Por último vamos identificar o botão de enviar: <button id="_form_176_submit" class="_submit" type="submit">Enviar</button>
+
+# Agora que sabemos como identificar um elemento na página, vamos seleciona-lo através dos métodos find.element() que retorna 1 objeto e find.elements() que retorna uma lista.
+# Para isso iremos importar a seguinte biblioteca:
+
+from selenium.webdriver.common.by import By
+
+navegador.find_element(By.ID, 'fullname').send_keys("Seu Nome")
+navegador.find_element(By.ID, 'email').send_keys("seuemail@email.com")
+navegador.find_element(By.ID, '_form_176_submit').click()
+
+# Pronto! As caixas foram devidamente preenchidas e enviadas
+
