@@ -63,5 +63,16 @@ from selenium.webdriver.common.by import By
 
 navegador.find_element(By.CLASS_NAME, 'custom-logo').click()
 
+# Assim seremos direcionados para o link que estava atrelado à imagem da logo, no caso, a homepage da empresa que fornece o curso pelo qual eu estudo. 
+# Ainda assim um elemento numa página pode fazer parte de uma classe onde outros elementos também estão atrelados, então iremos utilizar um terceiro método, o XPATH
+# O XPATH é o caminho do elemento dentro da página baseando-se na estrutura XML do arquivo (Extended Markup Language), que é uma estrutura muito parecida com o HTML (Hypertext Markup Language)
+# Para selecionar o XPATH de uma página, ao identificar onde o elemento fica com o método de seleção na página, podemos clicar com o botão direito e em "Copiar", na nova janela podemos "Copiar XPATH"
+# Substituindo o método de classe por XPATH no exemplo anterior, ele fica assim:
 
+from selenium.webdriver.common.by import By
 
+navegador.find_element(By.XPATH, '//*[@id="header"]/div/div/div[1]/a/img').click()
+
+# Vale ressltar: Dentro do XPATH existem textos com aspas duplas ("), sendo assim é recomendado definir o texto do Xpath sempre entre aspas simples (') para evitar conflitos.
+
+# Outros métodos: Tag, Link Text e Name:
