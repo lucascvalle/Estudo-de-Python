@@ -48,3 +48,20 @@ navegador.find_element(By.ID, '_form_176_submit').click()
 
 # Pronto! As caixas foram devidamente preenchidas e enviadas
 
+# Seleção por Classe e XPATH:
+# É possível que elementos na página não possuam um ID para identifica-lo, sendo assim se faz necessário o uso de outros médotos de seleção.
+# Imagens são um exemplo muito comum de não possuir um ID, vamos começar selecionando a logo disponível na página pela Classe
+# Utilizamos o mesmo método anterior para descobrir a classe da imagem. 
+
+import os
+
+caminho = os.getcwd()
+arquivo = caminho + r"\Pagina Hashtag.html"
+navegador.get(arquivo)
+
+from selenium.webdriver.common.by import By
+
+navegador.find_element(By.CLASS_NAME, 'custom-logo').click()
+
+
+
