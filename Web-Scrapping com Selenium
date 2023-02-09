@@ -76,3 +76,30 @@ navegador.find_element(By.XPATH, '//*[@id="header"]/div/div/div[1]/a/img').click
 # Vale ressltar: Dentro do XPATH existem textos com aspas duplas ("), sendo assim é recomendado definir o texto do Xpath sempre entre aspas simples (') para evitar conflitos.
 
 # Outros métodos: Tag, Link Text e Name:
+
+# Por Tag: Como percebemos, na estrutura HTML existem tags que possuem chaves que definem a estrutura da página. Sendo assim é possível que objetos específicos possuam tags específicas.
+# Desta forma é possível selecionar estes objetos "por tag", ou retornar até mesmo uma lista baseada em vários itens alocados em uma mesma tag.
+# Selecionando o título: Ao olharmos a estrutura da página veremos que o título possui a tag "h2" (header), sendo o único com esta tag, iremos retornar apenas 1 elemento.
+
+# Vamos considerar que o título de uma página é um texto, logo iremos armazena-lo em uma string de texto. O código fica assim:
+from selenium.webdriver.common.by import By
+
+titulo = navegador.find_element(By.TAG_NAME, 'h2').text
+print(titulo)
+
+# Por Link Text:
+# Existe uma diferença quando vamos coletar um texto que está atrelado a um link. Um é o Link Text (texto inteiro) e o Partial Link Text (parte do texto)
+# Caso saibamos apenas um trecho do texto ou queiramos retornar uma lista que possui um texto em comum, usaremos o By.PARTIAL_LINK_TEXT.
+# Desta forma vaamos coletar o número de Whatsapp disponível na página:
+
+from selenium.webdriver.common.by import By
+
+numero_whatsapp = navegador.find_element(By.PARTIAL_LINK_TEXT, 'WhatsApp').text
+print(numero_whatsapp)
+
+# Por Name: Alguns campos possuem um "nome" atribuido que também é possível selecionar elementos baseados nesta estrutura:
+# Vamos novamente preencher o formulário que foi feito primeiro, porém pelo name:
+
+navegador.find_element(By.NAME, 'email').send_keys("seuemail@email.com").
+
+
