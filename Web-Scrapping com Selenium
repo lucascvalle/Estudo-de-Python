@@ -102,4 +102,27 @@ print(numero_whatsapp)
 
 navegador.find_element(By.NAME, 'email').send_keys("seuemail@email.com").
 
+# Selecionando vários elementos: 
+# Utilizando o método find.elements(), ao invés de retornar um único elemento, retornaremos uma lista de elementos
+# Iremos buscar todos os elementos que possuem a classe "nav-link", pois esta é a classe dos links e iremos identificar quantos elementos iremos encontrar.
+
+links = navegador.find_elements(By.CLASS_NAME, 'nav-link')
+print(len(links))
+
+# Entretanto os elementos retornados pelo selenium não são "faceis" de identificar. Supondo que precisamos encontrar um elemento em específico dentro de uma lista, precisamos criar uma lógica capaz de identificar este elemento.
+# Para isso iremos criar um loop FOR.
+# Vamos tentar achar o link do Blog da página, para isso utilizaremos o texto "blog" para identificar quem a gente quer.
+
+for link in links:
+    if "blog" in link.text.lower():
+        link.click()
+        break
+        
+# Vamos reparar em alguns detalhes desse loop:
+# Primeiro definimos a variável link dentro da lista links, depois procuramos pelo texto blog dentro dos elementos da lista e para evitar problemas com Case sensitive, pedimos que ele seja .lower()
+# Por fim clicamos no elemento desejado e pedimos um break no loop, afinal, caso não seja feito o break, o programa iria ficar clicando em blog em loop infinito.
+
+
+
+
 
