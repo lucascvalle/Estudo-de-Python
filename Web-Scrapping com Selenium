@@ -120,8 +120,7 @@ for link in links:
         
 # Vamos reparar em alguns detalhes desse loop:
 # Primeiro definimos a variável link dentro da lista links, depois procuramos pelo texto blog dentro dos elementos da lista e para evitar problemas com Case sensitive, pedimos que ele seja .lower()
-# Por fim clicamos no elemento desejado e pedimos um break no loop, afinal, caso não seja feito o break, o programa iria ficar clicando em blog em loop infinito.
-
+# Por fim clicamos no elemento desejado e pedimos um break no loop, afinal, caso não seja feito o break o programa pode encontrar um erro mesmo com o código funcionando.
 
 
 
