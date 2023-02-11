@@ -122,6 +122,15 @@ for link in links:
 # Primeiro definimos a variável link dentro da lista links, depois procuramos pelo texto blog dentro dos elementos da lista e para evitar problemas com Case sensitive, pedimos que ele seja .lower()
 # Por fim clicamos no elemento desejado e pedimos um break no loop, afinal, caso não seja feito o break o programa pode encontrar um erro mesmo com o código funcionando.
 
+# Pegando texto de elementos:
+# Ao analisar alguns elementos podemos querer pegar duas informações diferentes. Por exemplo em links, o texto clicável que direciona um link é diferente do próprio link.
+# Sendo assim precisamos filtrar o nosso código quando se trata de extrair a informação de forma mais específica:
+# Vejamos por exemplo o link de WhatsApp disponível na página:
+# Para pegar seu texto:
 
+texto = navegador.find_element(By.XPATH, '/html/body/footer/div/div[1]/div[2]/div/a[2]').text
 
+# Agora vamos pegar o link, que no caso precisamos coletar o "atributo" da tag. 
+
+link = navegador.find_element(By.XPATH, '/html/body/footer/div/div[1]/div[2]/div/a[2]').get_attribute('href')
 
