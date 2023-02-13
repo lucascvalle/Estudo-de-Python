@@ -134,3 +134,25 @@ texto = navegador.find_element(By.XPATH, '/html/body/footer/div/div[1]/div[2]/di
 
 link = navegador.find_element(By.XPATH, '/html/body/footer/div/div[1]/div[2]/div/a[2]').get_attribute('href')
 
+# Em caso de imagens, a classe a tag <img> fica dentro de outra tag que faz a referência a um link, sendo assim, quando usamos o método de mostrar na página a partir do mouse, precisamos olhar na árvore html e procurar pelo 'href" da imagem e repetir o processo.
+# Iremos coletar o link de cada imagem da página que direciona para um curso específico, todos de uma vez:
+# Analisando a estrutura HTML da página, vamos reparar que todas as imagens estão definidas como child da tag <figure>, dentro da tag <figure> está a tag <a> com o atributo "href" definindo o link
+# O conceito é analisar e identificar tags ou classes em comum das imagens.
+# Logo o código fica assim:
+
+lista_elementos = navegador.find_elements(By.TAG_NAME, 'figure')
+print(len(lista_elementos))
+
+# Se o código estiver correto, a quantidade de elementos desta lista será a mesma da quantidade de cursos anunciados, que é 6.
+# Porém ainda precisamos coletar o link dessa imagem. Vamos escrever de forma que o código colete o link e evite imagens que não tenham o link:
+
+for elemento in lista_elementos:
+    try:
+        link_curso = elemento.find_element(By.TAG_NAME, 'a').get_attribute('href')
+        print(link_curso)
+    except:
+        continue
+
+
+
+
