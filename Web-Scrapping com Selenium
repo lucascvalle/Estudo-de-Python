@@ -152,6 +152,66 @@ for elemento in lista_elementos:
         print(link_curso)
     except:
         continue
+        
+# Preenchendo formulários com selenium
+# Existem vários tipos de botões e caixas diferentes quando estamos preenchendo formulários, aqui iremos usar o selenium em vários destes tipos.
+# Para isso usaremos o formulário no link: https://drive.google.com/file/d/1MG41r_xsylxFUC95uurJi7_XNh6X28Zh/view
+# Em resumo iremos utilizar o código desde o começo para abrir o navegador controlado pelo código e em seguida o código para cada etapa do formulário do link:
+# A seleção dos elementos da página será feita por Xpath.
+
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+
+servico = Service(ChromeDriverManager().install())
+navegador = webdriver.Chrome(service=servico)
+
+import os
+
+caminho = os.getcwd()
+arquivo = caminho + r"\formulario.html"
+navegador.get(arquivo)
+
+# Clicar no botão: O botão vai gerar um pop-up (alerta), então iremos usar o código para também clicar no pop-up após clicar no botão.
+
+navegador.find_element(By.XPATH, '/html/body/form/input[1]').click()
+alerta = navegador.switch_to.alert
+alerta.accept()
+
+# Ativar/Desativar checkbox:
+
+navegador.find_element(By.XPATH, '/html/body/form/input[2]').click()
+
+# Verificando se o botão está marcado: O print deve retornar como True.
+
+valor = navegador.find_element(By.XPATH, '/html/body/form/input[2]').is_selected()
+print(valor)
+
+# Botão de seleção de cor:
+# Independente de ser pedido em RGB, quando verificamos o valor do input do Botão de seleção de cor, o valor retorna em HEX, podemos verificar isso com o seguinte código:
+
+valor = navegador.find_element(By.XPATH, '/html/body/form/input[4]').get_attribute("value")
+print(valor)
+
+# Sendo assim iremos passar o valor do vermelho RGB (232 33 33) em HEX para preenche-lo:
+navegador.find_element(By.XPATH, '/html/body/form/input[4]').send_keys('#E82121')
+
+# O botão abaixo segue o mesmo processo:
+navegador.find_element(By.XPATH, '/html/body/form/input[5]').send_keys('#2143E8')
+
+# Preenchendo data:
+navegador.find_element(By.XPATH, '/html/body/form/input[6]').send_keys('15/02/1994')
+
+# Preenchendo Data e hora: Neste caso o campo "ano" permite a inserção de mais um digito, o que impede de digitar diretamente, sendo necessário usar a tecla Tab para passar para o campo hora, sendo assim iremos importar uma biblioteca. 
+
+from selenium.webdriver.common.keys import Keys
+
+navegador.find_element(By.XPATH, '/html/body/form/input[7]').send_keys('15/02/1994', Keys.TAB, '22:00')
+
+
+
+
 
 
 
