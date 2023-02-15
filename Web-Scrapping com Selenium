@@ -209,7 +209,72 @@ from selenium.webdriver.common.keys import Keys
 
 navegador.find_element(By.XPATH, '/html/body/form/input[7]').send_keys('15/02/1994', Keys.TAB, '22:00')
 
+# Botão com seleção de arquivo e envio de arquivo com caminho completo
 
+caminho = os.getcwd()
+arquivo = caminho + r"\formulario.html"
+
+navegador.find_element(By.XPATH, '/html/body/form/input[8]').send_keys(arquivo)
+
+# Seleção de mês e ano
+
+navegador.find_element(By.XPATH, '/html/body/form/input[9]').send_keys('janeiro', Keys.TAB, '1980')
+
+# Campo númerico:
+navegador.find_element(By.XPATH, '/html/body/form/input[10]').clear()
+navegador.find_element(By.XPATH, '/html/body/form/input[10]').send_keys("123456")
+
+# Campo de senha:
+
+navegador.find_element(By.XPATH, '/html/body/form/input[11]').send_keys("123456")
+
+# RadioButtons (É possível selecionar apenas 1)
+# A localização do item é da mesma forma que é feita toda a seleção de todos os outros itens:
+
+navegador.find_element(By.XPATH, '/html/body/form/input[13]').click()
+
+# Slider
+# Este é o caso "mais diferente" até então, então vamos tentar identificar como ele funciona identificando o seu valor:
+valor = navegador.find_element(By.XPATH, '/html/body/form/input[15]').get_attribute('value')
+print(valor)
+
+# O código irá retornar um número, no caso, "50", pois o range (0 - 100) está no meio da barra. 
+# Caso você mexa manualmente e verifique o valor, verá o valor sendo alterado para outro valor dentro da range.
+# Vamos armazenar o nosso elemento numa variável e "limpa-lo", isso fará ele retornar para 50.
+# Precisamos entender que não é possível digitar diretamente o valor através do send_keys, então o que faremos é "empurrar" a barra a quantidade de vezes necessária
+# Sendo assim teremos duas soluções, uma para valores maiores que a metade, outra para valores menores que a metade.
+
+elemento = navegador.find_element(By.XPATH, '/html/body/form/input[15]')
+
+elemento.clear()
+for i in range(70 - 50):
+    elemento.send_keys(Keys.ARROW_RIGHT)
+# Perceba que em valores maiores que a metade ele irá pegar o valor que desejamos (70) e irá subtrair o valor padrão (metade, 50), resultando em +20, que é a quantidade de vezes que ele irá empurrar a barra para a direita.
+    
+elemento.clear()
+for i in range(50 - 30):
+    elemento.send_keys(Keys.ARROW_LEFT)
+# No caso contrário o conceito é o mesmo, mas o valor maior agora é a "metade" (50), sendo assim iremos subtrair o valor que desejamos atingir (30) para que o resultado seja a diferença (+20) e a quantidade de vezes que ele irá empurrar a seta para a esquerda.
+
+
+# Caixa de Texto:
+
+navegador.find_element(By.XPATH, '/html/body/form/input[16]').send_keys("Feijão")
+
+# Caixa de horas:
+
+navegador.find_element(By.XPATH, '/html/body/form/input[17]').send_keys('15:15')
+
+# Caixa de Data personalizada (Semanal):
+
+navegador.find_element(By.XPATH, '/html/body/form/input[18]').send_keys('17', '2005')
+
+# Bloco de texto:
+
+navegador.find_element(By.XPATH, '//*[@id="story"]').clear()
+navegador.find_element(By.XPATH, '//*[@id="story"]').send_keys("Olá", Keys.ENTER, 'Sou lucascvalle, acesse meu github: https://github.com/lucascvalle', Keys.ENTER, 'Valeu')
+
+# Selecionando itens em uma lista: 
 
 
 
