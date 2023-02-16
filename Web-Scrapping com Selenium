@@ -275,6 +275,56 @@ navegador.find_element(By.XPATH, '//*[@id="story"]').clear()
 navegador.find_element(By.XPATH, '//*[@id="story"]').send_keys("Olá", Keys.ENTER, 'Sou lucascvalle, acesse meu github: https://github.com/lucascvalle', Keys.ENTER, 'Valeu')
 
 # Selecionando itens em uma lista: 
+# Podemos ver pela estrutura da página que não é necessário primeiro selecionar a caixa de seleção, não sendo possível selecionar diretamente o item da lista pelo Xpath.
+# Sendo assim existem duas formas de selecionar um item numa caixa, o método de seleção e o método input.
+
+navegador.find_element(By.XPATH, '/html/body/form/select[1]').send_keys('B')
+
+# Conferindo o método de entrada:
+
+valor = navegador.find_element(By.XPATH, '/html/body/form/select[1]').get_attribute('value')
+print(valor)
+
+# Em alguns casos a lista é baseada em HTML+JavaScript, então vamos usar o método de clicar na lista para selecionar o valor + biblioteca time, pois temos de esperar a lista "carregar":
+
+import time
+navegador.find_element(By.XPATH, '/html/body/form/select[1]').click()
+time.sleep(0.5)
+navegador.find_element(By.XPATH, '/html/body/form/select[1]/option[3]').click()
+
+# Além de clicar utilizaremos o Select do selenium, este método permite que você também selecione listas suspensas:
+# Quando olhamos para a estrutura da página HTML podemos identificar os elementos <select>, que são os "alvos" do método que iremos importar agora.
+# No link da documentação do selenium tem mais detalhes: https://www.selenium.dev/pt-br/documentation/webdriver/elements/select_lists/
+# Iremos selecionar o elemento da página por Tag <select>, uma vez que esta é a única: 
+
+from selenium.webdriver.support.select import Select
+
+elemento = navegador.find_element(By.TAG_NAME, 'select')
+elemento_select = Select(elemento)
+
+# Criamos uma nova variável para definir o select do nosso elemento e agora podemos usar os métodos específicos como posição, índice e texto do elemento:
+# Índice:
+
+elemento_select.select_by_index(0)
+
+# Texto ou Valor: Lembrando que são dois métodos diferentes, podemos ver essa diferença quando olhamos a estrutura HTML da página onde é possível identificar o valor e o texto visível na mesma linha.
+# Texto: 
+
+elemento_select.select_by_visible_text('B')
+
+# Valor:
+
+elemento_select.select_by_value('c')
+
+# Por fim vamos ler o item selecionado:
+
+lista_itens = elemento_select.all_selected_options
+print(lista_itens)
+
+print(lista_itens[0].get_attribute("value"))
+
+
+
 
 
 
