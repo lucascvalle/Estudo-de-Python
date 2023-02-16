@@ -318,10 +318,8 @@ elemento_select.select_by_value('c')
 
 # Por fim vamos ler o item selecionado:
 
-lista_itens = elemento_select.all_selected_options
-print(lista_itens)
-
-print(lista_itens[0].get_attribute("value"))
+item = elemento_select.first_selected_options
+print(item)
 
 
 
