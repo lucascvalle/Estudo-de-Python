@@ -1,2 +1,21 @@
 # Na segunda parte do Web-Scrapping com Selenium iremos começar com um processo de automatização de emissão de uma nota fiscal.
 # Irei explicar passo a passo usando os arquivos do link: https://drive.google.com/drive/folders/1QxYWQUuFsETIh8ntXngQSQ0XPwTsq6Sy
+
+# Nos arquivos em questão já está construída uma página que pode criar uma nota fiscal a partir de dados inseridos na página, então iremos fazer com que o programa escreva de forma automatizada todos os dados necessários para a emissão da nota.
+# Vamos começar importando as bibliotecas necessárias:
+
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+
+options = webdriver.ChromeOptions()
+options.add_experimental_option("prefs", {
+  "download.default_directory": r"C:\Users\joaol\downloads",
+  "download.prompt_for_download": False,
+  "download.directory_upgrade": True,
+  "safebrowsing.enabled": True
+})
+
+servico = Service(ChromeDriverManager().install())
+navegador = webdriver.Chrome(service=servico, options=options)
