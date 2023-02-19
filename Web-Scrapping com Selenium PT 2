@@ -19,3 +19,11 @@ options.add_experimental_option("prefs", {
 
 servico = Service(ChromeDriverManager().install())
 navegador = webdriver.Chrome(service=servico, options=options)
+
+# Entrar na página de login (no nosso caso é login.html)
+import os
+
+caminho = os.getcwd()
+arquivo = caminho + r"\login.html"
+navegador.get(arquivo)
+
