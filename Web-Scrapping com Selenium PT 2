@@ -110,3 +110,57 @@ ActionChains(navegador).move_to_element(menu).perform()
 # Clicando no item:
 
 item.click()
+
+# ------------------------------------------------------------------------------------------------
+
+# Alertas 
+
+# Para lidar com alertas precisamos entender que há diferenças entre alertas e pop-ups. 
+# Pop-ups fazem parte da estrutura da página, enquanto alertas são elementos do navegador.
+# Usaremos os arquivos do link: https://drive.google.com/drive/folders/1XSKOhpKCK6uNWuhGX99VyCGwAblJfgsz 
+
+# A página disponível possui 3 tipos de alertas, vamos primeiro "emitir" o alerta básico:
+
+navegador.find_element(By.XPATH, '/html/body/div[1]/input').click()
+
+# Agora iremos aceitar o alerta
+# Existem duas formas, uma mais simples e outra mais "completa".
+# A simples pode ser feita sem importar novas bibliotecas:
+
+alerta = navegador.switch_to.alert
+alerta.accept()
+
+# A outra forma requer a importação da biblioteca Alert:
+
+from selenium.webdriver.common.alert import Alert
+
+alerta = Alert(navegador)
+alerta.accept()
+
+# Alerta de confirmação:
+
+navegador.find_element(By.XPATH, '/html/body/div[2]/input').click()
+
+alerta = Alert(navegador)
+
+# Aceitar
+alerta.accept()
+
+# Cancelar
+alerta.dismiss()
+
+# Pegando o texto do alerta:
+
+alerta = Alert(navegador)
+texto = alerta.text
+print(texto)
+
+# Alerta com input:
+
+navegador.find_element(By.XPATH, '/html/body/div[3]/button').click()
+
+alerta = navegador.switch_to.alert
+time.sleep(2)
+
+alerta.send_keys('123123') # Lembre que ele funciona, apesar de não aparecer
+alerta.accept()
