@@ -88,3 +88,25 @@ for linha in tabela.index:
     # recarregar a página para limpar o formulário
     navegador.refresh()
 
+# ---------------------------------------------------------------------------------------------------------
+
+# Action Chains:
+# As vezes quando visitamos alguma página, esta página possui uma "lista falsa" (Dropdown) que não é possível interagir diretamente, mais precisamente uma lista que aparece apenas sobrepondo o mouse sobre um botão.
+# Analisando a estrutura html da página podemos até conseguir o Xpath de um dos itens que podem aparecer na lista em questão, porém provavelmente teremos um erro de ElementNotInteractableException.
+# Sendo assim usaremos o ActionChains para resolver este problema:
+
+# Importando:
+from selenium.webdriver import ActionChains
+
+# O ActionChains permitirá interagir com 2 elementos em cadeia, sendo assim precisamos definir os 2 elementos, o "menu" e o "item".
+
+menu = navegador.find_element(By.XPATH, '//*[@id="menu-item-dropdown-16313"]')
+item = navegador.find_element(By.XPATH, '//*[@id="menu-item-17042"]/a')
+
+# Colocando o mouse em cima do menu:
+
+ActionChains(navegador).move_to_element(menu).perform()
+
+# Clicando no item:
+
+item.click()
