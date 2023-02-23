@@ -164,3 +164,44 @@ time.sleep(2)
 
 alerta.send_keys('123123') # Lembre que ele funciona, apesar de não aparecer
 alerta.accept()
+
+# Trabalhando com Abas e Janelas diferentes:
+# As vezes quando clicamos em elementos de uma página o navegador abre uma nova aba ou janela como resultado, entretanto é necessário descrever no código que iremos mudar a aba/janela que estamos usando.
+# Vamos voltar para um código que já utilizamos anteriormente na primeira parte:
+
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+
+servico = Service(ChromeDriverManager().install())
+navegador = webdriver.Chrome(service=servico)
+
+import os
+
+caminho = os.getcwd()
+arquivo = caminho + r"\Pagina Hashtag.html"
+navegador.get(arquivo)
+
+# Agora vamos clicar em um elemento que irá criar uma nova aba. 
+
+navegador.find_element(By.XPATH, '/html/body/section[2]/div/div[4]/figure/a/img').click()
+
+# O selenium não vai mudar de aba automaticamente e vai sempre por padrão continuar na mesma aba.
+# Vamos mudar a aba:
+
+aba_original = navegador.window_handles[0]
+nova_aba = navegador.window_handles[1]
+
+# Criamos uma variável para cada aba e então fazemos a troca:
+
+navegador.switch_to.window(nova_aba)
+
+# Agora podemos selecionar elementos e interagir com eles dentro da nova aba.
+
+navegador.find_element(By.ID, 'fullname').send_keys("Seu Nome")
+
+# Ver os titulos de todas as abas
+for aba in navegador.window_handles:
+    navegador.switch_to.window(aba)
+    print(navegador.title)
