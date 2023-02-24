@@ -190,7 +190,7 @@ navegador.find_element(By.XPATH, '/html/body/section[2]/div/div[4]/figure/a/img'
 # O selenium não vai mudar de aba automaticamente e vai sempre por padrão continuar na mesma aba.
 # Vamos mudar a aba:
 
-aba_original = navegador.window_handles[0]
+aba_original = navegador.window_handles[0] # Quando utilizamos o método window.handles a indexação das abas se dá pela ordem em qual as abas foram abertas, independente da ordem que elas estabelecerem no navegador. 
 nova_aba = navegador.window_handles[1]
 
 # Criamos uma variável para cada aba e então fazemos a troca:
@@ -205,3 +205,35 @@ navegador.find_element(By.ID, 'fullname').send_keys("Seu Nome")
 for aba in navegador.window_handles:
     navegador.switch_to.window(aba)
     print(navegador.title)
+    
+# Fechar a aba atualmente selecionada
+
+navegador.close()
+
+# Fechar todas as abas (navegador inteiro)
+
+navegador.quit()
+
+# Waits:
+# Quando precisamos esperar que elementos da página carreguem podemos utilizar a biblioteca Time com o método sleep() para fazer isso de forma "bruta", entretanto é possível fazer isso importando 2 biblioteca do selenium.
+
+# EC WebDriverWait
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+navegador.get("https://www.hashtagtreinamentos.com/") # Esta página possui um pop-up que aparece após cerca de 15 segundos que iremos fecha-la
+
+elemento = WebDriverWait(navegador, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'eicon-close')))
+
+elemento.click()
+
+# Desta forma após abrir a página no navegador será identificado o "elemento" que só poderá ser fechado após ser devidamente identificado.
+# A identificação do elemento acontece no momento que a condição .until() é atingida. A documentação do selenium possui outras formas de satisfazer essa condição.
+
+
+# Agora iremos utilizar as nossas novas habilidades adquiridas para realizar um projeto de consulta jurídica:
+# Para isso iremos utilizar os arquivos do link: https://drive.google.com/drive/folders/14ejEr0E1L8tfeYF5ytCxmxJrox-kEUcR
+# Coloque todos os arquivos na mesma pasta
+
+
+
