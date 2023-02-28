@@ -229,13 +229,17 @@ elemento.click()
 
 # Desta forma após abrir a página no navegador será identificado o "elemento" que só poderá ser fechado após ser devidamente identificado.
 # A identificação do elemento acontece no momento que a condição .until() é atingida. A documentação do selenium possui outras formas de satisfazer essa condição.
-
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Agora iremos utilizar as nossas novas habilidades adquiridas para realizar um projeto de consulta jurídica:
 # Para isso iremos utilizar os arquivos do link: https://drive.google.com/drive/folders/14ejEr0E1L8tfeYF5ytCxmxJrox-kEUcR
 # Coloque todos os arquivos na mesma pasta
 
-# Novamente vamos usar o código que abre o navegador e a página que está sala nos arquivos.
+# Explicando a página: A página possui um botão dropdown não clicável (lista aparece com a sobreposição do mouse) que abre uma nova página onde é necessário inserir dados.
+# Os dados inseridos farão uma "pesquisa" que, após inseridos irão gerar um primeiro alerta que indicará que a pesquisa está em andamentoo e um segundo alerta após o fim da pesquisa
+# O resultado final é dado de forma aleatória (50%) e caso seja positivo, pergunta se deseja fazer o download do processo. 
+
+# Novamente vamos usar o código que abre o navegador e a página que está salva nos arquivos.
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -259,12 +263,14 @@ display(tabela)
 from selenium.webdriver import ActionChains
 import time
 
+# Todas as bibliotecas necessárias foram devidamente importadas, agora vamos fazer um loop que utilize os dados da tabela para fazer pesquisa de todas as informações
+
 for linha in tabela.index:
 
     # Para cada processo (linha da tabela)
     navegador.get(arquivo)
 
-    # abrir a lista de cidades
+    # Abrir a lista de cidades
     botao = navegador.find_element(By.CLASS_NAME, 'dropdown-menu')
     ActionChains(navegador).move_to_element(botao).perform()
     
