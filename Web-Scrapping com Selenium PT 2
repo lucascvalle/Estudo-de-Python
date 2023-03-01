@@ -319,3 +319,51 @@ navegador.quit()
 display(tabela)
 
 tabela.to_excel("Processos Atualizado.xlsx")
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+# Tirando prints da tela:
+# Podemos fazer uma screemshot com o Selenium, sendo ela de toda a tela ou de apenas parte dela. 
+# Vamos repetir o código para abrir o navegador e a página web que você deseja acessar. 
+# Após abrir a página é muito simples:
+
+navegador.save_screenshot("print.png") # Podemos mudar o resultado final da extensão da imagem mudando para .jpg
+
+# Agora vamos importar uma biblioteca que nos permitirá tirar o print de apenas um recorte da tela.
+
+from PIL import Image
+
+imagem = Image.open("print.png") # Vamos abrir a screenshot que salvamos anteriormente
+
+# Para cortar um pedaço da tela é necessário passar 4 pontos de referência para os eixo X e Y, seus pontos iniciais e finais. 
+# Vale ressaltar que o ponto (x,y) = (0,0) é o canto superior esquerdo
+# Então vamos descobrir como identificar estes 4 pontos.
+
+# Vamos tirar um print da barra de navegação da página, primeiro vamos identificar seu elemento na página. 
+
+elemento = navegador.find_element(By.ID, 'header')
+
+# Agora que identificamos o elemento da página vamos coletar sua posição e tamanho.
+
+# Iremos saber em que ponto da página o header está definido e seu tamanho para usar como referência.
+
+posicao = elemento.location
+tamanho = elemento.size
+print(posicao)
+print(tamanho)
+
+# Percebemos que a resposta são 2 dicionários com chave X, Y (posicao) e altura e largura (tamanho).
+# Sendo assim agora vamos definir as 4 variáveis x e y
+
+x_inicial = posicao["x"]
+y_inicial = posicao["y"]
+x_final = (x_inicial + tamanho["width"])
+y_final = (y_inicial + tamanho["height"])
+
+# Coletamos o valor inicial com o índice da chave do dicionário X e Y, após isso iremos coletar o valor final somando seu tamanho.
+# Para finalizar vamos usar o método .crop() onde iremos passar uma tupla com os 4 valores que obtivemos.
+
+imagem = imagem.crop((x_inicial, y_inicial, x_final, y_final))
+imagem.save("print_pedaco.png")
+
+
