@@ -1,0 +1,36 @@
+# Vamos a partir desta parte aprender a gerênciar o nosso navegador. 
+# Comecemos iniciando com o código que estamos utilizando nas outras duas partes.
+
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+
+servico = Service(ChromeDriverManager().install())
+navegador = webdriver.Chrome(service=servico)
+
+import os
+
+caminho = os.getcwd()
+arquivo = caminho + r"\Pagina Hashtag.html"
+navegador.get(arquivo)
+
+# Como já vimos, ao abrir a página do navegador ele não abre "maximizado", então para fazer isso usamos o código:
+
+navegador.maximize_window()
+
+# Para voltar ao tamanho anterior:
+
+navegador.minimize_window()
+
+# Headless: Para que o navegador funcione sem aparecer na tela precisamos utilizar esta ferramenta.
+# Para isso iremos passar alguns parâmetros necessários para que ele passe a funcionar assim:
+
+options = webdriver.ChromeOptions()
+options.add_argument('--headless')
+novo_nav = webdriver.Chrome(service=servico, options=options) # Esta linha substitui a linha do código "padrão" que usamos para abrir e definir a variável do navegador.
+novo_nav.get("https://www.google.com/")
+print(novo_nav.title)
+
+# Alguns sites funcionam de forma diferente no modo headless e no modo normal, por isso o mesmo código pode não funcionar em alguns casos específicos.
+
