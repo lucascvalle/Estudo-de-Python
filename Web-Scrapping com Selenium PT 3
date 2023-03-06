@@ -83,11 +83,48 @@ import time
 for i in range(30):
     qtde_scroll = i * 2000 # Aqui garantimos que o valor será aumentado
     navegador.execute_script(f'window.scroll(0, {qtde_scroll})') # Esse método .execute_script() é utilizado para executar os comandos Javascript
-    time.sleep(2)
+    time.sleep(2) # E por fim vamos inserir um tempo que permita que a página carregue as informações
 
 lista_videos = navegador.find_elements(By.ID, 'thumbnail') # Identifica-se que na estrutura da página o link fica relacionado ao ID thumbnail, sendo assim iremos aproveitar isso para coletar o link
 
 for video in lista_videos: # Então vamos rodar um loop que irá extrair o link do vídeo da lista com o parâmetro href
     print(video.get_attribute("href"))
     
+# iFrames
+# As vezes é possível que façamos tudo necessário para identificar e coletar informações de um website, entretanto por algum motivo o código acaba não funcionando.
+# Isso pode acontecer por conta de o elemento estar dentro de um iFrame
+# Queremos pegar o pontos por jogo mandante da 1ª linha da tabela
+
+link = "https://pbdatatrader.com.br/jogosdodia"
+
+# Normalmente:
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+
+servico = Service(ChromeDriverManager().install())
+navegador = webdriver.Chrome(service=servico)
     
+import time
+navegador.get(link) # Vamos acessar o site e esperar carregar as informações
+time.sleep(10) 
+
+# No site em questão podemos ver pela estrutura HTML que as informações das tabelas estão armazenadas dentro de um iFrame e que ainda existem mais informações armazendas dentro de outro iFrame que fica dentro do primeiro.
+# Basicamente funciona como se fosse um site dentro de um site dentro de um site. (Inception??)
+# Então o que iremos fazer é "mudar a página" do Selenium, sendo assim:
+
+iframe = navegador.find_element(By.TAG_NAME, 'iframe') # Para localizar o primeiro iFrame 
+navegador.switch_to.frame(iframe) # Para mudar para dentro do primeiro iFrame
+
+iframe = navegador.find_element(By.TAG_NAME, 'iframe') # Para localizar o segundo iFrame
+navegador.switch_to.frame(iframe) # Para mudar para dentro do segundo iFrame
+
+# Agora podemos coletar o Xpath da informação e "coletar" corretamente.
+
+valor_xpath = '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container[19]/transform/div/div[2]/div/visual-modern/div/div/div[2]/div[1]/div[4]/div/div[1]/div[8]'
+texto = navegador.find_element(By.XPATH, valor_xpath).text
+print(texto)
+
+
+
