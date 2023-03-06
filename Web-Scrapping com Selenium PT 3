@@ -34,3 +34,60 @@ print(novo_nav.title)
 
 # Alguns sites funcionam de forma diferente no modo headless e no modo normal, por isso o mesmo código pode não funcionar em alguns casos específicos.
 
+# Vamos então aprender a carregar um navegador com Cookies e Login.
+# O conceito é acessar o navegador enquanto aproveita o Login e as informações já salvas em um perfil.
+# No chrome, quando acessamos a página "chrome://version" no navegador, podemos visualizar todas as informações do perfil que estamos acessando, dentre estas informações está o "Caminho do Perfil".
+# Nesse endereço é possível localizar a pasta com todas as informações salvas no perfil do Chrome.
+# Então vamos iniciar o nosso navegador da seguinte forma:
+
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+
+servico = Service(ChromeDriverManager().install())
+
+options = webdriver.ChromeOptions()
+options.add_argument(r'user-data-dir=C:\Users\seuusuario\AppData\Local\Google\Chrome\User Data\Profile Selenium') # Aqui iremos passar o Caminho do perfil e iremos substituir o "Profile 1" por "Profile Selenium"
+navegador = webdriver.Chrome(service=servico, options=options)
+
+# Quando este código for executado, um novo perfil será criado para o Chrome.
+# Agora sempre que você abrir esse navegador ele irá abrir com as informações de websites salvas, por exemplo ao fazer o Login do Whatsapp usando o QR code, nas vezes seguintes em que você acessar o site usando o perfil novo não será mais necessário fazer a leitura do código.
+
+# Comandos Javascript com Selenium:
+# Iremos integrar usando o Python o Selenium com comandos Javascript.
+# Em alguns casos (Youtube por exemplo) os sites quando têm suas páginas acessadas não carregam todas as informações na página de imediato, se fazendo necessário realizar o scroll da tela para que mais informações possam ser carregadas.
+# Sendo assim iremos aprender a fazer o scroll da tela:
+# Iremos coletar o nome dos primeiros 50 vídeos de uma pesquisa no Youtube.
+
+# window.scroll(0, 100) # Esse é o comando Javascript para realizar o Scroll, sendo (x,y), X para rolagem lateral e Y para rolagem vertical
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+
+servico = Service(ChromeDriverManager().install())
+navegador = webdriver.Chrome(service=servico)
+
+# Acessando a pesquisa no youtube: 
+navegador.get("https://www.youtube.com/results?search_query=python")
+
+# Dando scroll na tela
+# Podemos fazer um único scroll com o comando navegador.execute_script(), entretanto queremos fazer vários scrolls
+# Entretanto temos que entender que o valor passado na qtde_scroll deve aumentar, já que este referência a posição do scroll, não a quantidade em si.
+# Ou seja: se eu fizer o scroll de 1000 pontos várias e várias vezes o scroll vai continuar na posição 1000.
+# Sendo assim:
+
+import time
+
+for i in range(30):
+    qtde_scroll = i * 2000 # Aqui garantimos que o valor será aumentado
+    navegador.execute_script(f'window.scroll(0, {qtde_scroll})') # Esse método .execute_script() é utilizado para executar os comandos Javascript
+    time.sleep(2)
+
+lista_videos = navegador.find_elements(By.ID, 'thumbnail') # Identifica-se que na estrutura da página o link fica relacionado ao ID thumbnail, sendo assim iremos aproveitar isso para coletar o link
+
+for video in lista_videos: # Então vamos rodar um loop que irá extrair o link do vídeo da lista com o parâmetro href
+    print(video.get_attribute("href"))
+    
+    
