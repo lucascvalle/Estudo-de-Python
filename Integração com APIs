@@ -1,0 +1,73 @@
+# Neste módulo vamos entender o que são APIs e como integrar o Python com este recurso.
+# API: É um conjunto de códigos para usar um serviço/site/aplicativo específico. Cada site/ferramenta tem sua própria API. É importante que você saiba ler as APIs que precisar para saber usar
+# Um dos padrões mais comuns em API é pegar informações em formato json, uma espécie de dicionário que precisa ser tratada no Python para podermos analisar
+# As possibilidades de API são infinitas, vamos fazer 2 exemplos aqui: Cotação de Moedas e Envio de SMS.
+# O que precisamos?
+# Quase sempre você precisa de uma conta para consumir uma API. Algumas APIs são abertas, como a https://docs.awesomeapi.com.br/api-de-moedas , mas em muitos casos (como veremos no caso do SMS) vamos precisar ter uma conta ativa para consumir a API
+# A Documentação da API (ou exemplos da internet) é a chave para conseguir usar uma API
+
+# Vamos começar pegando as cotações atual de todas as Moedas
+# Para isso iremos precisar de duas bibliotecas.
+
+import requests # Para fazer uma requisição
+import json # A ideia é converter a informação do formato JSON para um dicionário em Python.
+
+cotacoes = requests.get('https://economia.awesomeapi.com.br/json/all') # O Site disponibiliza o link que fornece a cotação de todas as moedas.
+cotacoes_dic = cotacoes.json()
+print(cotacoes_dic)
+
+# Qual foi a última cotação do Dólar, do Euro e do BitCoin?
+print('Dólar: {}'.format(cotacoes_dic['USD']['bid']))
+print('Euro: {}'.format(cotacoes_dic['EUR']['bid']))
+print('Bitcoin: {}'.format(cotacoes_dic['BTC']['bid']))
+
+# Pegar a cotação dos últimos 30 dias do dólar
+cotacoes_dolar30d = requests.get('https://economia.awesomeapi.com.br/json/daily/USD-BRL/30')
+cotacoes_dolar_dic = cotacoes_dolar30d.json()
+lista_cotacoes_dolar = [float(item['bid']) for item in cotacoes_dolar_dic]
+print(lista_cotacoes_dolar)
+
+# Pegar as cotações do BitCoin de Jan/20 a Out/20
+cotacoes_btc = requests.get('https://economia.awesomeapi.com.br/json/daily/BTC-BRL/200?start_date=20200101&end_date=20201031')
+cotacoes_btc_dic = cotacoes_btc.json()
+lista_cotacoes_btc = [float(item['bid']) for item in cotacoes_btc_dic]
+lista_cotacoes_btc.reverse()
+print(lista_cotacoes_btc)
+print(len(lista_cotacoes_btc))
+
+# Gráfico com as cotações do BitCoin
+
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(15, 5))
+plt.plot(lista_cotacoes_btc)
+plt.show()
+
+# Agora vamos utilizar uma API que é necessário ter o Login para realizar a tarefa.
+# O 1º Passo de toda API com Login é criar uma conta e pegar suas credenciais
+# No seu código, o 1º passo é sempre estabelecer a conexão com a API, usando seu login e suas credenciais
+# Crie uma conta neste website: https://www.twilio.com/docs/libraries/python
+# Instale no prompt do seu editor o "pip install twilio"
+# Após criar o cadastro vamos pegar o SID e o Token.
+
+from twilio.rest import Client
+
+account_sid = 'suachavesid"
+token = 'seutoken"
+
+# De acordo com as regras é necessário gerar um número para enviar e verificar um número para receber as mensagens.
+# Iremos procurar o recurso "Get a Twilio Number"
+
+remetente = '+15673343563'
+destino = 'seunumero'
+
+client = Client(account_sid, token) # Identificamos o usuário
+
+# Agora iremos definir a mensagem identificado o usuário, definindo a mensagem, dizendo quem irá enviar (remetente) e quem irá receber (destino)
+message = client.messages \
+                .create(
+                     body="Hello, World",
+                     from_=remetente,
+                     to=destino
+                 )
+print(message.sid)
