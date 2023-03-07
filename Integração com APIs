@@ -85,20 +85,24 @@ print(message.sid)
 from flask import Flask
 import pandas as pd
 
-app = Flask(__name__) # cria o site
+app = Flask(__name__) # Cria o site
 tabela = pd.read_excel("Vendas - Dez.xlsx")
 
-@app.route("/") # decorator -> diz em qual link a função vai rodar
-def fat(): # função
+# Retornando o faturamento total.
+@app.route("/") # Decorator -> Diz em qual link/página a função vai rodar
+def fat(): # Função -> Define o que vai acontecer na página
     faturamento = float(tabela["Valor Final"].sum())
-    return {"faturamento": faturamento}
+    return {"faturamento": faturamento} # Fazendo com que o retorno da função seja um dicionário Python, podemos considerar que o retorno é um JSON, definindo assim como parte de uma API
 
+# Vendas de todos os produtos
 @app.route("/vendas/produtos") 
 def vendas_produtos(): 
     tabela_vendas_produtos = tabela[["Produto", "Valor Final"]].groupby("Produto").sum()
     dic_vendas_produtos = tabela_vendas_produtos.to_dict()
     return dic_vendas_produtos
 
+# Vendas de um produto específico
+# Neste caso basta apenas passar o nome do produto exatamente como está na tabela
 @app.route("/vendas/produtos/<produto>") 
 def fat_produto(produto): 
     tabela_vendas_produtos = tabela[["Produto", "Valor Final"]].groupby("Produto").sum()
@@ -109,5 +113,9 @@ def fat_produto(produto):
     else:
         return {produto: "Inexistente"}
     
-app.run() # no replit use app.run(host="0.0.0.0") # coloca o site no ar
+app.run() # coloca o site no ar
+
+# Podemos usar alguns sites/ferramentas para disponibilizar a API em links online, um exemplo é o Replit (https://replit.com/) que fornece esse serviço para teste de forma gratuita ou pago para mantê-lo online 24h.
+# Neste caso em especial apenas é necessário mudar a ultima linha onde há app.run() por: app.run('host=0.0.0.0')
+
 
