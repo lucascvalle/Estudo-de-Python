@@ -118,4 +118,67 @@ app.run() # coloca o site no ar
 # Podemos usar alguns sites/ferramentas para disponibilizar a API em links online, um exemplo é o Replit (https://replit.com/) que fornece esse serviço para teste de forma gratuita ou pago para mantê-lo online 24h.
 # Neste caso em especial apenas é necessário mudar a ultima linha onde há app.run() por: app.run('host=0.0.0.0')
 
+# Introdução a Firebase e armazenando informações Online
+# O Firebase é um conjunto de serviços online que oferece um serviço de hospedagem de informações de forma não relacional (NoSQL), com a estrutura de árvore.
+# Criando um projeto no console do Firebase vamos fazer a integração com o Python.
+# Em "Criação" iremos para "Realtime Database" e "Criar banco de dados", configurando a criação do banco de dados baseado no melhor para você de acordo com a localização:
+# Nas regras do Banco de dados vamos iniciar em modo de teste.
+# Na construção do Banco de dados começamos adicionando chaves e valores. Caso seja passado apenas a Chave sem o valor, criamos uma pasta.
 
+# Sendo assim no banco de dados iremos criar da seguinte forma:
+# /Vendas/ID1/{cliente: "fulano", }
+# /Produtos/PiD1/{nome: "fone de ouvido", quantidade: 200, preco: 100}
+
+# Agora que criamos uma estrutura básica para o nosso banco de dados podemos perceber que o banco de dados possui um Link (onde adicionamos a primeira "pasta")
+# Sendo assim agora iremos fazer a integração do Python com a REST API do Firebase através desse link.
+# Vamos começar importando as duas bibliotecas que já fizemos antes:
+
+import requests
+import json
+
+link = "seu_link_aqui"
+
+# Criar um novo produto (POST)
+# Começamos criando um dicionário de Python com as informações que vamos criar utilizando uma variável que represente os dados:
+dados = {'nome': 'teclado', 'preco': 150, 'quantidade': 80}
+requisicao = requests.post(f'{link}/Produtos/.json', data=json.dumps(dados)) 
+# Repare que para evitar mudar o link da variável vamos usar o f-string para adicionar o endereço "/Produtos" e editar diretamente na pasta de produtos e terminar com "/.json".
+# Além disso precisamos passar o dicionário que criamos junto com o método json.dumps()
+print(requisicao) # Para verificarmos se a requisição foi feita com sucesso iremos esperar que o código retorne o código 200 
+print(requisicao.text) # Ele irá retornar um ID aleatório para o produto.
+
+
+# Criar uma venda (POST)
+dados = {'cliente': 'alon', 'preco': 150, 'produto': 'teclado'}
+requisicao = requests.post(f'{link}/Vendas/.json', data=json.dumps(dados))
+print(requisicao)
+print(requisicao.text)
+
+# Rode o mesmo código novamente e veja que será gerado um novo ID para uma nova venda, mesmo que os dados sejam os mesmos.
+
+# Editar a venda (PATCH)
+dados = {'cliente': 'fulano'} # Vamos mudar que a venda feita anteriormente para o "Alon" foi na verdade feita para o "Fulano"
+requisicao = requests.patch(f'{link}/Vendas/-NQ-zGUJ0bytjIV1zYfw/.json', data=json.dumps(dados)) # Vamos passar o ID único que foi criado na venda.
+print(requisicao)
+print(requisicao.text)
+
+# As informações que não foram passadas no dicionário não será alteradas ou removidas, uma vez que o código entende que deve apenas atualizar as informações mencionadas.
+
+# Pegar uma venda específico ou todas as vendas (GET)
+requisicao = requests.get(f'{link}/Vendas/.json') 
+print(requisicao) # Primeiro pegamos todas as informações do banco de dados:
+dic_requisicao = requisicao.json()
+print(dic_requisicao) # Aqui podemos visualizar que as vendas foram armazenadas no dicionário.
+
+# Como queremos descobrir o ID de uma venda sem precisar visualizar manualmente, vamos percorrer o nosso dicionário
+id_alon = None # Onde será atribuido o ID do cliente
+for id_venda in dic_requisicao:
+    cliente = dic_requisicao[id_venda]['cliente']
+    if cliente == "alon":
+        print(id_venda)
+        id_alon = id_venda # Ao final atribuimos o ID identificado pelo Loop à variável que criamos anteriormente.
+
+# Deletar uma venda (DELETE)
+requisicao = requests.delete(f'{link}/Vendas/{id_alon}/.json')
+print(requisicao)
+print(requisicao.text)
