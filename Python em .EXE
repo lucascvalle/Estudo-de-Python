@@ -14,3 +14,35 @@
 # 3 - Usar uma biblioteca de conversão (pyinstaller ou auto-py-to-exe) para transformar o código em executável.
 # 4 - Testar e adaptar o que for necessário.
 
+# Vamos começar instalando o pyinstaller e executando ele em seguida.
+# Vou utilizar um código de outro repositório da integração do Python com APIs, em específico o código que integra com o twilio, uma API que faz o envio de mensagens (SMS) para números.
+
+from twilio.rest import Client
+
+account_sid = 'siddasuaconta'
+token = 'tokendasuaconta'
+
+client = Client(account_sid, token)
+
+remetente = '+15673343563' # Este número pertence à minha conta do Twilio
+destino = 'seunumero'
+
+message = client.messages.create(
+    to=destino, 
+    from_=remetente,
+    body="Atenção, Chico Butico, compareça à gerência.")
+
+print(message.sid)
+
+# Vamos primeiro rodar o código com o jupyter e ver que ele está rodando normalmente.
+# Após isso vamos baixar o arquivo no formato .py, podemos fazer isso em File > Download e em seguida vamos conferir o seu funcionamento.
+# Para isso vamos o prompt do anaconda, acessamoss a pasta one está o arquivo .py e fazemos o comando: python "nome do arquivo.py"
+# Uma vez funcionando corretamente, vamos fazer a conversão para .EXE
+# Garanta que o pyinstaller está instalado no computador através do pip install pyinstaller
+
+# Ainda no prompt vamos rodar o seguinte código: pyinstaller -w "nome do arquivo.py"
+# Muito provavel que o código demore bastante uma vez que ainda não criamos um ambiente virtual, o que significa que todos os recursos instalados no Python do seu computador também serão considerados para a transformação do código em .EXE
+# Após o processo ser concluído, na pasta onde o código.py está salvo serão criados 2 pastas (build, dist) e 1 arquivo ("nome do arquivo.spec")
+# Na pasta dist poderemos encontrar a versão de distribuição desse programa, um aplicativo com o "nome do arquivo.exe", ao ser executado ele irá fazer o mesmo que o código fez antes.
+# Para compartilhar este programa basta agora que você faça uma .zip da pasta dist e compartilhe. 
+
