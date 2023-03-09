@@ -2,4 +2,15 @@
 # Para isso vale ressaltar que utilizaremos ambientes virtuais e que, caso não tenha noção de como criar ou como funciona
 # Temos um tópico específico (e bem curto) sobre isso aqui neste repositório.
 
-# 
+# Existe uma grande diferença que teremos de dividir que é o grau de complexidade do código.
+# Para códigos mais simples que roda apenas algumas bibliotecas que manipulam arquivos específicos utilizaremos um método que basicamente "converte o código".
+# Para códigos mais complexos que envolvem abrir outros programas e até mesmo manipular eles (como Selenium com navegadores), precisamos usar uma versão "mais complexa".
+# Temos de ter cuidado com "o que o programa faz", uma vez que a sua intenção é rodar em qualquer computador, temos que nos preocupar com o funcionamento do código em qualquer ambiente.
+
+
+# Funcionamento:
+# 1 - Seu código deve estar funcionando sem erros no jupyter
+# 2 - Transformar o código jupyter em scripts python padrão (extensão .py). Seu código deve estar funcionando nesse formato também.
+# 3 - Usar uma biblioteca de conversão (pyinstaller ou auto-py-to-exe) para transformar o código em executável.
+# 4 - Testar e adaptar o que for necessário.
+
