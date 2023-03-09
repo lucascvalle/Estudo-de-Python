@@ -1,0 +1,23 @@
+# Muitas vezes precisamos criar programas com "versões" ou até mesmo recursos diferentes no Python.
+# Em alguns casos precisamos de poucos recursos para criar um programa e se formos utilizar a versão que está instalada em nosso computador isso pode acabar pesando bastante no resultado final
+# Sendo assim vamos criar ambientes virtuais com versões mais "leves" do Python para criar programas específicos. 
+# Essencialmente usamos o virtualenv, mas o anaconda tem um método próprio para isso
+# Obs: Quando você cria um ambiente virtual, ele vem praticamente sem nada, então você precisa usar o pip ou o conda para instalar cada pacote que for usar
+
+# Vamos começar abrindo o nosso prompt do Anaconda e navegar com ele até a pasta que desejamos criar o ambiente virtual utilizando os comandos "dir" e "cd"
+# Neste link é possível encontrar detalhes sobre como funciona o gerenciamento de ambientes virtuais no anaconda: https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html
+# Vamos criar o ambiente:
+
+# Ainda no prompt do conda vamos passar o seguinte código: conda create -n meuambientevirtual python=3.6
+
+# Isto vai criar uma ambiente virtual com uma versão específica do Python, diferente da versão que está atualmente no seu computador.
+# Após carregar alguns pacotes ele irá perguntar se deseja prosseguir (y or n), aperte Y e enter que ele irá criar o ambiente.
+
+# Após criar o ambiente virtual o prompt irá apresentar o nome (base) no começo da linha de endereço do comando, isso signfica que ele ainda está rodando no sistema principal e ainda não está no ambiente virtual.
+# Para ativar o ambiente virtual vamos usar o comando passado no prompt: conda activate meuambientevirtual
+# Repare que agora o (base) foi modificado para (meuambientevirtual), significando que agora ele está rodando.
+
+# Para desativar o ambiente usamos o código: conda deactivate
+# Por fim, para deletar o ambiente virtual usamos o código: conda remove --name meuambientevirtual --all
+# Novamente basta confirmar a ação com o Y e enter
+
