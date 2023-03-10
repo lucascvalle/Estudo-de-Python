@@ -44,5 +44,17 @@ print(message.sid)
 # Muito provavel que o código demore bastante uma vez que ainda não criamos um ambiente virtual, o que significa que todos os recursos instalados no Python do seu computador também serão considerados para a transformação do código em .EXE
 # Após o processo ser concluído, na pasta onde o código.py está salvo serão criados 2 pastas (build, dist) e 1 arquivo ("nome do arquivo.spec")
 # Na pasta dist poderemos encontrar a versão de distribuição desse programa, um aplicativo com o "nome do arquivo.exe", ao ser executado ele irá fazer o mesmo que o código fez antes.
-# Para compartilhar este programa basta agora que você faça uma .zip da pasta dist e compartilhe. 
+# Para compartilhar este programa basta agora que você faça uma .zip da pasta dist e compartilhe.
+
+# Agora vamos fazer com o que o tamanho do arquivo final seja reduzido, para isso vamos criar um ambiente virtual com uma quantidade limitada de recursos e vamos realizar o mesmo processo.
+# Vamos utilizar o mesmo arquivo que funciona em .py
+# O ambiente virtual pode ser criado no prompt do anaconda:
+# Acessamos o diretorio onde está o arquivo dentro do prompt 
+# Criar o ambiente virtual
+# Instalar as bibliotecas que iremos utilizar no programa
+# Instalar novamente o pyinstaller no ambiente virtual
+# Converter para EXE
+
+# Percebemos que agora o programa irá demorar muito menos para compilar o programa, uma vez que ele possuirá uma quantidade significativamente menor de bibliotecas para inserir
+
 
