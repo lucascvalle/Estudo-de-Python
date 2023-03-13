@@ -57,4 +57,32 @@ print(message.sid)
 
 # Percebemos que agora o programa irá demorar muito menos para compilar o programa, uma vez que ele possuirá uma quantidade significativamente menor de bibliotecas para inserir
 
+# Quando se trata de programas mais complexos que puxam informações de outros arquivos precisamos fazer algumas coisas de uma forma diferente
+# O programa coletará os links dos vídeos de uma lista de canais do Youtube fornecida pelo usuário:
+# Utilizaremos um arquivo csv nesse programa: https://drive.google.com/file/d/1oxbozCzti_Z7He2qku_Ve9iWJM-j__o_/view
+
+# Vamos importar uma quantidade considerável de bibliotecas:
+import time, urllib
+from IPython.display import display
+from selenium import webdriver 
+import pandas as pd 
+import numpy as np
+from selenium.webdriver.common.by import By 
+from selenium.webdriver.support.ui import WebDriverWait 
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import StaleElementReferenceException
+from tkinter import *
+import tkinter.filedialog
+from tkinter import messagebox
+
+# Ler o arquivo csv:
+# Como queremos que este programa funcione em "qualquer computador", vamos permitir que o usuário acesse o arquivo através de um pedido.
+
+root= Tk()
+arquivo = tkinter.filedialog.askopenfilename(title = "Selecione o Arquivo csv com Canais e Keywords")
+root.destroy()
+
+buscas_df = pd.read_csv(arquivo, encoding = 'ISO-8859-1', sep=';')
+display(buscas_df.head())
 
