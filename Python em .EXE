@@ -86,3 +86,70 @@ root.destroy()
 buscas_df = pd.read_csv(arquivo, encoding = 'ISO-8859-1', sep=';')
 display(buscas_df.head())
 
+# Agora vamos fazer com que o programa acesse a coluna de links dentro do arquivo e faça a coleta de links de vídeos dos canais.
+
+buscas_canais = buscas_df.iloc[:,0]
+driver = webdriver.Chrome() 
+
+hrefs = []
+delay = 5
+
+
+# Pegando os itens dos canais
+for canal in buscas_canais:
+    if canal is np.nan:
+        break
+    hrefs.append(canal)
+    driver.get(canal)
+    try: # Esta linha é para pular o botão de aceitar os cookies
+        driver.find_element(By.XPATH, '//*[@id="yDmH0d"]/c-wiz/div/div/div/div[2]/div[1]/div[3]/div[1]/form[2]/div/div/button').click() 
+    except:
+        pass
+    time.sleep(2)
+    myElem = WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH, '//*[@id="tabsContent"]/tp-yt-paper-tab[2]'))) # Aguardar a aparição da coluna de vídeos
+    time.sleep(2)
+    tab = driver.find_element(By.XPATH, '//*[@id="tabsContent"]/tp-yt-paper-tab[2]').click() # Selecionar a coluna de vídeos
+    time.sleep(2)
+    altura = 0
+    nova_altura = 1
+    while nova_altura > altura:
+            altura = driver.execute_script("return document.documentElement.scrollHeight")
+            driver.execute_script("window.scrollTo(0, " + str(altura) + ");")
+            time.sleep(3)
+            nova_altura = driver.execute_script("return document.documentElement.scrollHeight")
+    videos = driver.find_elements(By.ID, 'thumbnail')
+    try:
+        for video in videos:
+            meu_link = video.get_attribute('href')
+            if meu_link:
+                if not 'googleadservices' in meu_link: 
+                    hrefs.append(meu_link)
+    except StaleElementReferenceException:
+        time.sleep(2)
+        videos = driver.find_elements(By.ID, 'thumbnail')
+        for video in videos:
+            meu_link = video.get_attribute('href')
+            if meu_link:
+                if not 'googleadservices' in meu_link: 
+                    hrefs.append(meu_link)
+    print('Pegamos {} vídeos do Canal {}'.format(len(videos), canal))
+
+driver.quit()
+
+# Salvando o resultado em um csv
+hrefs_df = pd.DataFrame(hrefs)
+hrefs_df.to_csv(r'Canais Prontos.csv', sep=',', encoding='utf-8')
+root= Tk()
+messagebox.showinfo("Programa Finalizado com Sucesso", "Seu arquivo csv foi gerado com sucesso na pasta do Programa") # Mostrando para o usuário que o programa foi executado
+root.destroy()
+
+# Agora que o programa está funcionando vamos baixar a versão .py do programa e tentar executa-lo por meio do prompt do anaconda.
+# Desta vez iremos precisar de uma nova biblioteca: precisamos fazer o pip install auto-py-to-exe
+# Agora no prompt do anaconda iremos rodar apenas o auto-py-to-exe
+# Uma nova janela irá abrir, nessa janela iremos passar algumas informações:
+# Em Script Location iremos passar o endereço do arquivo .py
+# Em Additional Files vamos inserir o ChromeDriver que fica dentro da pasta do Python.
+# Em Advanced iremos em --debug e iremos selecionar o imports.
+# Por fim iremos conferir em Settings o local onde o programa será criado e clicamos em Convert
+
+
