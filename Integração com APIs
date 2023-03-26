@@ -10,7 +10,7 @@
 
 # Vamos começar pegando as cotações atual de todas as Moedas
 # Para isso iremos precisar de duas bibliotecas.
-
+´´´´
 import requests # Para fazer uma requisição
 import json # A ideia é converter a informação do formato JSON para um dicionário em Python.
 
@@ -44,6 +44,7 @@ import matplotlib.pyplot as plt
 plt.figure(figsize=(15, 5))
 plt.plot(lista_cotacoes_btc)
 plt.show()
+´´´´
 
 # Agora vamos utilizar uma API que é necessário ter o Login para realizar a tarefa.
 # O 1º Passo de toda API com Login é criar uma conta e pegar suas credenciais
@@ -51,15 +52,15 @@ plt.show()
 # Crie uma conta neste website: https://www.twilio.com/docs/libraries/python
 # Instale no prompt do seu editor o "pip install twilio"
 # Após criar o cadastro vamos pegar o SID e o Token.
-
+´´´´
 from twilio.rest import Client
 
 account_sid = 'suachavesid"
 token = 'seutoken"
-
+´´´´
 # De acordo com as regras é necessário gerar um número para enviar e verificar um número para receber as mensagens.
 # Iremos procurar o recurso "Get a Twilio Number"
-
+´´´´
 remetente = '+15673343563'
 destino = 'seunumero'
 
@@ -73,7 +74,7 @@ message = client.messages \
                      to=destino
                  )
 print(message.sid)
-
+´´´´
 # Criação de REST API
 # REST nada mais é que uma forma de dois sistemas computacionais de se comunicarem utilizando da tecnologia HTTP usada pelos web browsers e servidores.
 # Utilizaremos essa base de dados: https://docs.google.com/spreadsheets/d/1-m7Ba4U582rPHradwKLnMBbcoWPeIMIy/edit?usp=share_link&ouid=106510620305921502117&rtpof=true&sd=true
