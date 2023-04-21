@@ -1,16 +1,18 @@
-# Realização de processos de forma automatizada utilizando Python.
-# Instalar Anaconda para a utilização do Jupyter como interface
-# Divisão de ações passo a passo
-# Resultado final: Envio de um e-mail
-
+## Realização de processos de forma automatizada utilizando Python.
+### Instalar Anaconda para a utilização do Jupyter como interface
+#### Divisão de ações passo a passo
+#### Resultado final: Envio de um e-mail
+``
 import pyautogui
 import pyperclip
 import time
 # pyautogui.PAUSE = O tempo em segundos aguardados pra execução de cada ação
 pyautogui.PAUSE = 0.5
+``
 
-# Passo 1 - Entrar no Sistema.
-# Abrir o Chrome
+#### Passo 1 - Entrar no Sistema.
+#### Abrir o Chrome
+``
 pyautogui.press("win")
 pyautogui.write("chrome")
 pyautogui.press("enter")
@@ -22,10 +24,13 @@ pyautogui.hotkey("ctrl", "t")
 pyperclip.copy("link")
 pyautogui.hotkey("ctrl", "v")
 pyautogui.press("enter")
+``
 
-# Passo 2 - Navegar no Sistema
-# "import time" é utilizado para que o sistema consiga administrar o tempo de forma eficiente
 
+#### Passo 2 - Navegar no Sistema
+#### "import time" é utilizado para que o sistema consiga administrar o tempo de forma eficiente
+
+``
 time.sleep(5)
 pyautogui.position()
 # Descobrir a posição exata do mouse depois de 5 segundos
@@ -33,12 +38,14 @@ pyautogui.position()
 time.sleep(3)
 pyautogui.click(x=,y=, clicks=2)
 # Utilizado para clicar em um local específico da tela. x= posição horizontal, y= posição horizontal, clicks=numero de cliques
+`` 
 
-# Passo 3 - Importar e Exportar bases de dados e arquivos
-# É possível utilizando os comandos .click, .press, .hotkey de acordo com a localização do arquivo no pc/web
+#### Passo 3 - Importar e Exportar bases de dados e arquivos
+#### É possível utilizando os comandos .click, .press, .hotkey de acordo com a localização do arquivo no pc/web
 
-# Passo 4 - Calculando Indicadores
-# Sem o Jupyter, instalar o pandas, numpy e openpyxl
+#### Passo 4 - Calculando Indicadores
+#### Sem o Jupyter, instalar o pandas, numpy e openpyxl
+``
 
 import pandas as pd
 # "as pd" é apelidar o comando
@@ -54,10 +61,11 @@ display(arquivo)
 quantidade = arquivo["Quantidade"].sum()
 faturamento = arquivo["Faturamento"].sum()
 # display(NomedoValor) pode ser usado para conferir se a atribuição do valor está correta
+`` 
 
-# Passo 5 - Enviar E-mail com os resultados obtidos
-# Com o Chrome em foco, repetir o processo de abertura de aba
-
+#### Passo 5 - Enviar E-mail com os resultados obtidos
+#### Com o Chrome em foco, repetir o processo de abertura de aba
+``
 pyautogui.hotkey("ctrl", "t")
 pyperclip.copy("link")
 pyautogui.hotkey("ctrl", "v")
@@ -97,6 +105,7 @@ pyautogui.hotkey("ctrl", "v")
 # enviar o email
 pyautogui.hotkey("ctrl", "enter")
 
-# conferir o código sendo executado por completo
+``
+#### conferir o código sendo executado por completo
 
 
